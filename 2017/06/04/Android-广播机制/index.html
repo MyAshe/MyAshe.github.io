@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Android," />
 
 
 
@@ -93,15 +93,17 @@
 
 
 
-<meta name="description" content="Thank  You  Simple  Life">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Ymir&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="###Android广播机制Android系统中内置了很多类型的广播，用来发送各种状态信息，我们可以利用在程序中监听广播来获取需要的信息。具体实现就要用到广播接收器 了。注册广播接收器一般有两种：在代码中注册和在 AndroidManifest.xml 中注册，其中前者也被称为动态注册，后者也被称为静态注册。 ####动态注册：首先要新建一个继承自 BroadcastReceiver 的 Main">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 广播机制">
+<meta property="og:url" content="http://yoursite.com/2017/06/04/Android-广播机制/index.html">
 <meta property="og:site_name" content="Ymir&#39;s Blog">
-<meta property="og:description" content="Thank  You  Simple  Life">
+<meta property="og:description" content="###Android广播机制Android系统中内置了很多类型的广播，用来发送各种状态信息，我们可以利用在程序中监听广播来获取需要的信息。具体实现就要用到广播接收器 了。注册广播接收器一般有两种：在代码中注册和在 AndroidManifest.xml 中注册，其中前者也被称为动态注册，后者也被称为静态注册。 ####动态注册：首先要新建一个继承自 BroadcastReceiver 的 Main">
+<meta property="og:updated_time" content="2017-06-04T13:07:36.555Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ymir&#39;s Blog">
-<meta name="twitter:description" content="Thank  You  Simple  Life">
+<meta name="twitter:title" content="Android 广播机制">
+<meta name="twitter:description" content="###Android广播机制Android系统中内置了很多类型的广播，用来发送各种状态信息，我们可以利用在程序中监听广播来获取需要的信息。具体实现就要用到广播接收器 了。注册广播接收器一般有两种：在代码中注册和在 AndroidManifest.xml 中注册，其中前者也被称为动态注册，后者也被称为静态注册。 ####动态注册：首先要新建一个继承自 BroadcastReceiver 的 Main">
 
 
 
@@ -129,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/06/04/Android-广播机制/"/>
 
 
 
 
 
-  <title>Ymir's Blog</title>
+  <title>Android 广播机制 | Ymir's Blog</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -161,9 +163,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-   page-home 
- ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -246,9 +246,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -274,9 +274,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/06/04/Android-广播机制/" itemprop="url">Android 广播机制</a></h1>
+          <h1 class="post-title" itemprop="name headline">Android 广播机制</h1>
         
 
         <div class="post-meta">
@@ -323,52 +321,69 @@
       
 
       
+        <p>###Android广播机制<br>Android系统中内置了很多类型的广播，用来发送各种状态信息，我们可以利用在程序中监听广播来获取需要的信息。具体实现就要用到广播接收器 了。<br>注册广播接收器一般有两种：在代码中注册和在<strong> AndroidManifest.xml </strong>中注册，其中前者也被称为动态注册，后者也被称为静态注册。</p>
+<p>####动态注册：<br>首先要新建一个继承自<strong> BroadcastReceiver </strong>的 MainActivity 内部类，重写<strong> onReceiver </strong>方法，接收到指定的广播后，<strong> onReceiver </strong>方法会得到执行。<br>代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">class ABroadcastReceiver extends BroadcastReceiver&#123;</div><div class="line">	@Override</div><div class="line">    public void onReceive(Context context, Intent intent) &#123;</div><div class="line"></div><div class="line">    	Toast.makeText(context, &quot;Something is received&quot;, Toast.LENGTH_SHORT).show();</div><div class="line">    	//实现具体的逻辑</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>然后在合适的位置实现代码（要在程序运行时得到执行）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">IntentFilter intentFilter = new IntentFilter();</div><div class="line">intentFilter.addAction(&quot;接收到的广播信息&quot;);</div><div class="line">ABroadcastReceiver aBroadcastReceiver = new ABroadcastReceiver();</div><div class="line">registerReceiver(aBroadcastReceiver, intentFilter);</div></pre></td></tr></table></figure></p>
+<p>另外动态注注册的广播接收器一定都要在完毕后取消注册，例如在<strong> onDestroy() </strong>方法中实现。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">unregisterReceiver(aBroadcastReceiver);</div></pre></td></tr></table></figure></p>
+<p>####静态注册：<br>动态注册的广播接收器可以自由地控制注册与注销，只是必须要在程序启动之后才能接收到，因为注册的逻辑是写在生命周期的方法中的。用静态注册的方式了便可实现这个要求。<br>与动态注册一样，新建一个类继承自<strong> BroadcastReceiver </strong>（不是内部类），重写<strong> onReceiver </strong>方法，注意需要在<strong> AndroidManifest.xml </strong>中注册。<br>代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public class ABroadcastReceiver extends BroadcastReceiver&#123;</div><div class="line">	@Override</div><div class="line">    public void onReceive(Context context, Intent intent) &#123;</div><div class="line"></div><div class="line">    	Toast.makeText(context, &quot;Something is received&quot;, Toast.LENGTH_SHORT).show();</div><div class="line">    	//实现具体的逻辑</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong> AndroidManifest.xml </strong>中增加的代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;receiver android:name=&quot;.ABroadcastReceiver&quot; &gt;</div><div class="line">	&lt;intent-filter&gt;</div><div class="line">		&lt;action android:name=&quot;需要接收响应的广播内容&quot;/&gt;</div><div class="line">	&lt;/intent-filter&gt;</div><div class="line">&lt;/receiver&gt;</div></pre></td></tr></table></figure></p>
+<p>#####注意：<br>不要在<strong> onReceive() </strong>方法中添加过多的逻辑或者耗时操作，不然会报错，好像这个方法不允许开启线程，要是运行了长时间而没有结束，就会报错。</p>
+<p>####发送自定义广播：<br>代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Intent intent= new Intent(&quot;要发送的广播内容&quot;);</div><div class="line">sendBroadcast(intent);</div></pre></td></tr></table></figure></p>
+<p>若是两个广播接收器接收的广播一样，就可以自定义顺序，成为发送有序广播，需要修改上面代码段为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Intent intent= new Intent(&quot;要发送的广播内容&quot;);</div><div class="line">sendOrderedBroadc(intent, null);</div></pre></td></tr></table></figure></p>
+<p>如何决定先后顺序，在<strong> AndroidManifest.xml </strong>中注册的时候设定，修改注册的代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;receiver android:name=&quot;.ABroadcastReceiver&quot; &gt;</div><div class="line">	&lt;intent-filter android:priority=&quot;100&quot;&gt;</div><div class="line">		&lt;action android:name=&quot;需要接收响应的广播内容&quot;/&gt;</div><div class="line">	&lt;/intent-filter&gt;</div><div class="line">&lt;/receiver&gt;</div></pre></td></tr></table></figure></p>
+<p>发现添加了一段<strong> android:priority=”100” </strong>这个数字是一个优先级，优先级越高就可以先收到广播。<br>还有一个功能是截断广播，是在有序广播中实现的，在一个广播接收器的<br><strong> onReceiver </strong>方法添加：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public void onReceive(Context context, Intent intent) &#123; </div><div class="line">	......</div><div class="line">	abortBroadcast();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这样后面的广播接收器便收不到那条广播了。</p>
+
+      
+    </div>
+
+    <div>
+      
         
-          
-          ###Android广播机制Android系统中内置了很多类型的广播，用来发送各种状态信息，我们可以利用在程序中监听广播来获取需要的信息。具体实现就要用到广播接收器 了。注册广播接收器一般有两种：在代码中注册和在 AndroidManifest.xml 中注册，其中前者也被称为动态注册，后者也被称为
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/06/04/Android-广播机制/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
-      
-    </div>
-
-    <div>
       
     </div>
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+        </div>
+      
+
+      
+      
+      
 
       
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -376,6 +391,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -590,10 +609,10 @@
   
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
 
-  
+
 
   
 
