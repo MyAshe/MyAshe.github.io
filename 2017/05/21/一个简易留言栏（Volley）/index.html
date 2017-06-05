@@ -1,0 +1,802 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android 入门," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="要实现的功能 通过下拉刷新加载数据 上传留言 接收： [ 接收接口 ] 发送： [ 上传接口 ]   要实现的样式（很丑） 接收界面     发送界面   具体实现 下拉刷新代码  12345678910SwipeRefreshLayout layout = (SwipeRefreshLayout)findViewById(R.id.activity_main);layout.setOnRefre">
+<meta name="keywords" content="Android 入门">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一个简易的留言栏（Volley）">
+<meta property="og:url" content="http://yoursite.com/2017/05/21/一个简易留言栏（Volley）/index.html">
+<meta property="og:site_name" content="Ymir&#39;s Blog">
+<meta property="og:description" content="要实现的功能 通过下拉刷新加载数据 上传留言 接收： [ 接收接口 ] 发送： [ 上传接口 ]   要实现的样式（很丑） 接收界面     发送界面   具体实现 下拉刷新代码  12345678910SwipeRefreshLayout layout = (SwipeRefreshLayout)findViewById(R.id.activity_main);layout.setOnRefre">
+<meta property="og:image" content="http://img.blog.csdn.net/20170521102251961?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY3MDkxNTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170521102203757?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY3MDkxNTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-06-05T08:26:17.214Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一个简易的留言栏（Volley）">
+<meta name="twitter:description" content="要实现的功能 通过下拉刷新加载数据 上传留言 接收： [ 接收接口 ] 发送： [ 上传接口 ]   要实现的样式（很丑） 接收界面     发送界面   具体实现 下拉刷新代码  12345678910SwipeRefreshLayout layout = (SwipeRefreshLayout)findViewById(R.id.activity_main);layout.setOnRefre">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170521102251961?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY3MDkxNTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/21/一个简易留言栏（Volley）/"/>
+
+
+
+
+
+  <title>一个简易的留言栏（Volley） | Ymir's Blog</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ymir's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/21/一个简易留言栏（Volley）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="GPeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/sasha.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ymir's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">一个简易的留言栏（Volley）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-21T12:06:12+08:00">
+                2017-05-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="要实现的功能"><a href="#要实现的功能" class="headerlink" title="要实现的功能"></a>要实现的功能</h3><ul>
+<li><strong>通过下拉刷新加载数据</strong></li>
+<li><strong>上传留言</strong></li>
+<li><strong>接收：<a href="http://mclee.cn/getJson.php" target="_blank" rel="external"> [ 接收接口 ]</a></strong></li>
+<li><strong>发送：<a href="http://mclee.cn/postJson.php" target="_blank" rel="external"> [ 上传接口 ]</a></strong></li>
+</ul>
+<hr>
+<h3 id="要实现的样式（很丑）"><a href="#要实现的样式（很丑）" class="headerlink" title="要实现的样式（很丑）"></a>要实现的样式（很丑）</h3><ul>
+<li><strong>接收界面</strong></li>
+</ul>
+<p><img src="http://img.blog.csdn.net/20170521102251961?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY3MDkxNTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" width="280/"></p>
+<hr>
+<ul>
+<li><strong>发送界面</strong></li>
+</ul>
+<p><img src="http://img.blog.csdn.net/20170521102203757?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY3MDkxNTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" width="280/"></p>
+<h3 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h3><ul>
+<li><strong>下拉刷新代码</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">SwipeRefreshLayout layout = (SwipeRefreshLayout)findViewById(R.id.activity_main);</div><div class="line"></div><div class="line">layout.setOnRefreshListener(</div><div class="line">new SwipeRefreshLayout.OnRefreshListener()&#123;</div><div class="line"></div><div class="line">	@Override</div><div class="line">    public void onRefresh()</div><div class="line">    &#123; 请求接收数据 &#125;</div><div class="line"></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<hr>
+<ul>
+<li><strong>JSON解析代码</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">List&lt;String&gt; list = new ArrayList&lt;&gt;();</div><div class="line">ListView listView;</div><div class="line"></div><div class="line">JSONArray array = new JSONArray((String)message.obj);</div><div class="line">for(int i = 0; i &lt; array.length(); i++)</div><div class="line">&#123;</div><div class="line">	JSONObject jsonObject = array.getJSONObject(i);</div><div class="line">	String result = jsonObject.getString(&quot;message&quot;);</div><div class="line">	list.add(result);</div><div class="line">&#125;</div><div class="line">listView.setAdapter( new ..... );</div></pre></td></tr></table></figure>
+<hr>
+<ul>
+<li><strong>接收数据代码</strong><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">RequestQueuequeue=Volley.newRequestQueue(MainActivity.this);</div><div class="line">StringRequest mRequest = new StringRequest(</div><div class="line">		&quot;接收的接口&quot;,</div><div class="line">		new Response.Listener&lt;String&gt;() &#123;</div><div class="line">			@Override</div><div class="line">	        public void onResponse(String response) &#123;</div><div class="line"></div><div class="line">	            Handler message =......</div><div class="line">			&#125;</div><div class="line">		&#125;,</div><div class="line">        new Response.ErrorListener() &#123;</div><div class="line">	        @Override</div><div class="line">			public void onErrorResponse(VolleyError error&#123;</div><div class="line"></div><div class="line">				handler.sendEmptyMessage(0);</div><div class="line">			&#125;</div><div class="line">		&#125;);</div><div class="line">queue.add(mRequest);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<ul>
+<li><strong>发送数据代码（键值对上传，键名必须为json）</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">RequestQueue queue = Volley.newRequestQueue(SendMessage.this);</div><div class="line">StringRequest request = new StringRequest(</div><div class="line">	Request.Method.POST,</div><div class="line">	&quot;发送的接口&quot;,</div><div class="line">	new Response.Listener&lt;String&gt;() &#123;</div><div class="line">		@Override</div><div class="line">	    public void onResponse(String response) &#123;</div><div class="line">		&#125;</div><div class="line">    &#125;,new Response.ErrorListener() &#123;</div><div class="line">	    @Override</div><div class="line">        public void onErrorResponse(VolleyError error) &#123;</div><div class="line">		&#125;</div><div class="line">    &#125;)&#123;</div><div class="line">	    @Override</div><div class="line">        protected Map&lt;String, String&gt; getParams() </div><div class="line">        throws AuthFailureError &#123;</div><div class="line">	        Map&lt;String,String&gt; map = new HashMap&lt;&gt;();</div><div class="line">            map.put(&quot;json&quot;,result);</div><div class="line">            return map;</div><div class="line">        &#125;</div><div class="line">&#125;;</div><div class="line">queue.add(request);</div></pre></td></tr></table></figure>
+<hr>
+<h3 id="实现过程中遇到的一些问题"><a href="#实现过程中遇到的一些问题" class="headerlink" title="实现过程中遇到的一些问题"></a>实现过程中遇到的一些问题</h3><ul>
+<li><strong>自定义 Adapter</strong><br>没有合适的 Adapter 来加载 List 对象<br>这里要自定义一个 Adapter 类，主要来修改 Adapter 中的 getView() 方法</li>
+</ul>
+<h4 id="代码实现："><a href="#代码实现：" class="headerlink" title="代码实现："></a>代码实现：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">public class LISTAdapter extends BaseAdapter&#123;</div><div class="line"></div><div class="line">    private List&lt;String&gt; list;</div><div class="line">    private Context context;</div><div class="line"></div><div class="line">    public LISTAdapter(List&lt;String&gt; list, Context context)</div><div class="line">    &#123;</div><div class="line">        this.list = list;</div><div class="line">        this.context = context;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public int getCount() &#123;</div><div class="line">        return list.size();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public Object getItem(int position) &#123;</div><div class="line">        return list.get(position);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public long getItemId(int position) &#123;</div><div class="line">        return position;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public View getView</div><div class="line">    (int position, View convertView, ViewGroup parent) &#123;</div><div class="line">		View view = </div><div class="line">		LayoutInflater.from(context).inflate</div><div class="line">		(R.layout.item_view, parent, false);</div><div class="line">        TextView textView = </div><div class="line">        (TextView)view.findViewById(R.id.text_view);</div><div class="line">        textView.setText(list.get(position));</div><div class="line">        return view;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<ul>
+<li><strong>ListView 与 SwipeRefreshLayout 下拉刷新的冲突</strong><br>使用 ListView 的时候使用了 SwipeRefreshLayout 下拉刷新，那么 ListView 的向下滑动就会与 SwipeRefreshLayout  的下拉刷新产生冲突。<br>解决方法：<br>设置一个 ListView 的监听器：OnScrollListener，监听ListView 是否滑到了最上面的 item。</li>
+</ul>
+<h4 id="代码实现（这个方法放在-setOnRefreshListener-后面）："><a href="#代码实现（这个方法放在-setOnRefreshListener-后面）：" class="headerlink" title="代码实现（这个方法放在 setOnRefreshListener 后面）："></a>代码实现（这个方法放在 setOnRefreshListener 后面）：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">listView.setOnScrollListener(new AbsListView.OnScrollListener() &#123;</div><div class="line">	@Override</div><div class="line">    public void onScrollStateChanged</div><div class="line">    (AbsListView absListView, int i) &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">	@Override</div><div class="line">    public void onScroll</div><div class="line">    (AbsListView absListView, int firstVisibleItem, </div><div class="line">    int visibleItemCount, int totalItemCount) &#123;</div><div class="line">	    if (firstVisibleItem == 0)</div><div class="line">	        layout.setEnabled(true);</div><div class="line">        else</div><div class="line">	        layout.setEnabled(false);</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<hr>
+<h3 id="未解决问题"><a href="#未解决问题" class="headerlink" title="未解决问题"></a>未解决问题</h3><ul>
+<li><strong>还是 SwipeRefreshLayout 的刷新问题</strong><br>刷新一次之后如果再次刷新就会重新加载出来一组数据，如果用禁止刷新，发送数据之后的话便无法刷新加载新发送的数据。尴尬……</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android-入门/" rel="tag"># Android 入门</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/15/解决SwipeRefreshLayout下拉刷新与ListView下拉的冲突/" rel="next" title="解决SwipeRefreshLayout下拉刷新与ListView下拉的冲突">
+                <i class="fa fa-chevron-left"></i> 解决SwipeRefreshLayout下拉刷新与ListView下拉的冲突
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/04/Android-广播机制/" rel="prev" title="Android 广播机制">
+                Android 广播机制 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/sasha.jpg"
+               alt="GPeng" />
+          <p class="site-author-name" itemprop="name">GPeng</p>
+           
+              <p class="site-description motion-element" itemprop="description">Thank  You  Simple  Life</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/MyAshe" target="_blank" title="Github">
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/5712602930" target="_blank" title="微博">
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/ben-yu-61-53/activities" target="_blank" title="知乎">
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#要实现的功能"><span class="nav-number">1.</span> <span class="nav-text">要实现的功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#要实现的样式（很丑）"><span class="nav-number">2.</span> <span class="nav-text">要实现的样式（很丑）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体实现"><span class="nav-number">3.</span> <span class="nav-text">具体实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现过程中遇到的一些问题"><span class="nav-number">4.</span> <span class="nav-text">实现过程中遇到的一些问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#代码实现："><span class="nav-number">4.1.</span> <span class="nav-text">代码实现：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码实现（这个方法放在-setOnRefreshListener-后面）："><span class="nav-number">4.2.</span> <span class="nav-text">代码实现（这个方法放在 setOnRefreshListener 后面）：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#未解决问题"><span class="nav-number">5.</span> <span class="nav-text">未解决问题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GPeng</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
