@@ -1,0 +1,758 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android入门," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="Android 实现记住密码和强制下线功能1.实现的界面登录界面：强退界面 2.实现的功能退出程序之后重启程序之后，会记住之前输入正确的账号与密码，登录进去之后，点击 offLine 会要求强制下线。强制下线功能需要先关闭掉所有的活动，然后回到登录界面。这个强制下线并不是直接 finish(); 进程，这里要用到的是广播机制，在任何一个界面只要发送下线的广播，便可实现下线功能。 3.界面代码（1）">
+<meta name="keywords" content="Android入门">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 实现记住密码和强制下线功能">
+<meta property="og:url" content="http://yoursite.com/2017/06/11/Android 强制下线与记住密码功能/index.html">
+<meta property="og:site_name" content="Y Augerlmir">
+<meta property="og:description" content="Android 实现记住密码和强制下线功能1.实现的界面登录界面：强退界面 2.实现的功能退出程序之后重启程序之后，会记住之前输入正确的账号与密码，登录进去之后，点击 offLine 会要求强制下线。强制下线功能需要先关闭掉所有的活动，然后回到登录界面。这个强制下线并不是直接 finish(); 进程，这里要用到的是广播机制，在任何一个界面只要发送下线的广播，便可实现下线功能。 3.界面代码（1）">
+<meta property="og:image" content="c:/Users/admin/Desktop/login.jpg">
+<meta property="og:image" content="c:/Users/admin/Desktop/offline.jpg">
+<meta property="og:updated_time" content="2017-06-11T14:08:17.322Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android 实现记住密码和强制下线功能">
+<meta name="twitter:description" content="Android 实现记住密码和强制下线功能1.实现的界面登录界面：强退界面 2.实现的功能退出程序之后重启程序之后，会记住之前输入正确的账号与密码，登录进去之后，点击 offLine 会要求强制下线。强制下线功能需要先关闭掉所有的活动，然后回到登录界面。这个强制下线并不是直接 finish(); 进程，这里要用到的是广播机制，在任何一个界面只要发送下线的广播，便可实现下线功能。 3.界面代码（1）">
+<meta name="twitter:image" content="c:/Users/admin/Desktop/login.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/11/Android 强制下线与记住密码功能/"/>
+
+
+
+
+
+  <title>Android 实现记住密码和强制下线功能 | Y Augerlmir</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Y Augerlmir</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/11/Android 强制下线与记住密码功能/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="GPeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/sasha.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Y Augerlmir">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Android 实现记住密码和强制下线功能</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-11T22:08:02+08:00">
+                2017-06-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Android-实现记住密码和强制下线功能"><a href="#Android-实现记住密码和强制下线功能" class="headerlink" title="Android 实现记住密码和强制下线功能"></a>Android 实现记住密码和强制下线功能</h2><h4 id="1-实现的界面"><a href="#1-实现的界面" class="headerlink" title="1.实现的界面"></a>1.实现的界面</h4><p><strong>登录界面：</strong><br><img src="C:\Users\admin\Desktop\login.jpg" alt="" title="markdown&quot; &quot;width:350px"><br><strong>强退界面</strong><br><img src="C:\Users\admin\Desktop\offline.jpg" alt="" title="markdown&quot; &quot;width:350px"></p>
+<h4 id="2-实现的功能"><a href="#2-实现的功能" class="headerlink" title="2.实现的功能"></a>2.实现的功能</h4><p>退出程序之后重启程序之后，会记住之前输入正确的账号与密码，登录进去之后，点击 <strong>offLine</strong> 会要求强制下线。强制下线功能需要先关闭掉所有的活动，然后回到登录界面。<br>这个强制下线并不是直接 <strong>finish();</strong> 进程，这里要用到的是广播机制，在任何一个界面只要发送下线的广播，便可实现下线功能。</p>
+<h4 id="3-界面代码"><a href="#3-界面代码" class="headerlink" title="3.界面代码"></a>3.界面代码</h4><p><strong>（1）登录界面</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div></pre></td><td class="code"><pre><div class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    android:id=&quot;@+id/activity_main&quot;</div><div class="line">    android:orientation=&quot;vertical&quot;</div><div class="line">    android:layout_width=&quot;match_parent&quot;</div><div class="line">    android:layout_height=&quot;match_parent&quot;</div><div class="line">    android:padding=&quot;15dp&quot;&gt;</div><div class="line"></div><div class="line">    &lt;LinearLayout</div><div class="line">        android:orientation=&quot;horizontal&quot;</div><div class="line">        android:layout_width=&quot;match_parent&quot;</div><div class="line">        android:layout_height=&quot;60dp&quot;&gt;</div><div class="line"></div><div class="line">        &lt;TextView</div><div class="line">            android:layout_width=&quot;110dp&quot;</div><div class="line">            android:layout_height=&quot;wrap_content&quot;</div><div class="line">            android:textSize=&quot;20sp&quot;</div><div class="line">            android:layout_gravity=&quot;center_vertical&quot;</div><div class="line">            android:text=&quot;@string/account&quot;/&gt;</div><div class="line"></div><div class="line">        &lt;EditText</div><div class="line">            android:id=&quot;@+id/account&quot;</div><div class="line">            android:layout_width=&quot;0dp&quot;</div><div class="line">            android:layout_height=&quot;wrap_content&quot;</div><div class="line">            android:layout_weight=&quot;1&quot;</div><div class="line">            android:layout_gravity=&quot;center_vertical&quot;/&gt;</div><div class="line"></div><div class="line">    &lt;/LinearLayout&gt;</div><div class="line"></div><div class="line">    &lt;LinearLayout</div><div class="line">        android:orientation=&quot;horizontal&quot;</div><div class="line">        android:layout_width=&quot;match_parent&quot;</div><div class="line">        android:layout_height=&quot;60dp&quot;&gt;</div><div class="line"></div><div class="line">        &lt;TextView</div><div class="line">            android:layout_width=&quot;110dp&quot;</div><div class="line">            android:layout_height=&quot;wrap_content&quot;</div><div class="line">            android:textSize=&quot;20sp&quot;</div><div class="line">            android:layout_gravity=&quot;center_vertical&quot;</div><div class="line">            android:text=&quot;@string/password&quot;/&gt;</div><div class="line"></div><div class="line">        &lt;EditText</div><div class="line">            android:id=&quot;@+id/password&quot;</div><div class="line">            android:layout_width=&quot;0dp&quot;</div><div class="line">            android:layout_height=&quot;wrap_content&quot;</div><div class="line">            android:layout_weight=&quot;1&quot;</div><div class="line">            android:inputType=&quot;textPassword&quot;</div><div class="line">            android:layout_gravity=&quot;center_vertical&quot;/&gt;</div><div class="line"></div><div class="line">    &lt;/LinearLayout&gt;</div><div class="line"></div><div class="line">    &lt;LinearLayout</div><div class="line">        android:layout_width=&quot;match_parent&quot;</div><div class="line">        android:layout_height=&quot;wrap_content&quot;</div><div class="line">        android:orientation=&quot;horizontal&quot;&gt;</div><div class="line"></div><div class="line">        &lt;CheckBox</div><div class="line">            android:id=&quot;@+id/remember_pass&quot;</div><div class="line">            android:layout_width=&quot;wrap_content&quot;</div><div class="line">            android:layout_height=&quot;wrap_content&quot; /&gt;</div><div class="line"></div><div class="line">        &lt;TextView</div><div class="line">            android:layout_width=&quot;wrap_content&quot;</div><div class="line">            android:layout_height=&quot;wrap_content&quot;</div><div class="line">            android:textSize=&quot;16sp&quot;</div><div class="line">            android:text=&quot;@string/remember&quot;/&gt;</div><div class="line"></div><div class="line">    &lt;/LinearLayout&gt;</div><div class="line"></div><div class="line">    &lt;Button</div><div class="line">        android:id=&quot;@+id/login&quot;</div><div class="line">        android:layout_width=&quot;match_parent&quot;</div><div class="line">        android:layout_height=&quot;wrap_content&quot;</div><div class="line">        android:text=&quot;@string/login&quot;</div><div class="line">        android:textAllCaps=&quot;false&quot;</div><div class="line">        android:textSize=&quot;20sp&quot;/&gt;</div><div class="line"></div><div class="line">&lt;/LinearLayout&gt;</div></pre></td></tr></table></figure></p>
+<p><strong>（2）下线界面</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    android:orientation=&quot;vertical&quot;</div><div class="line">    android:id=&quot;@+id/activity_login&quot;</div><div class="line">    android:padding=&quot;15dp&quot;</div><div class="line">    android:layout_width=&quot;match_parent&quot;</div><div class="line">    android:layout_height=&quot;match_parent&quot;&gt;</div><div class="line"></div><div class="line">    &lt;Button</div><div class="line">        android:id=&quot;@+id/offline&quot;</div><div class="line">        android:text=&quot;@string/offline&quot;</div><div class="line">        android:textSize=&quot;20sp&quot;</div><div class="line">        android:textAllCaps=&quot;false&quot;</div><div class="line">        android:layout_width=&quot;match_parent&quot;</div><div class="line">        android:layout_height=&quot;wrap_content&quot; /&gt;</div><div class="line"></div><div class="line">&lt;/LinearLayout&gt;</div></pre></td></tr></table></figure></p>
+<h4 id="Activity代码"><a href="#Activity代码" class="headerlink" title="Activity代码"></a>Activity代码</h4><p>因为关系到强制下线时可能正处于任何一个界面，在每个界面都写一个强制下线弹出对话框的逻辑显然不可取。所以需要用到广播的技术。<br><strong>（1）ActivityCollector 类代码</strong><br>要关闭所有活动，就可以先创建一个 <strong>ActivityCollector</strong> 类用于管理所有的活动，然后在这个类关闭所有。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">public class ActivityCollector &#123;</div><div class="line"></div><div class="line">    public static List&lt;Activity&gt; activityList = new ArrayList&lt;&gt;();</div><div class="line"></div><div class="line">    public static void addActivity(Activity activity)&#123;</div><div class="line">        activityList.add(activity);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static void removeActivity(Activity activity)&#123;</div><div class="line">        activityList.remove(activity);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static void finishAll()&#123;</div><div class="line">        for (Activity activity:activityList) &#123;</div><div class="line">            if(!activity.isFinishing())</div><div class="line">                activity.finish();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>（2）BaseActivity 类代码</strong><br>然后创建 <strong>BaseActivity</strong> 类作为所有活动的父类，广播接收器就是在这个类动态创建，因为静态的接收器没有办法在 <strong>onReceive();</strong> 方法弹出对话框之类的框架的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line">public class BaseActivity extends AppCompatActivity &#123;</div><div class="line"></div><div class="line">    private ForceOfflineReceive receive;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onCreate(@Nullable Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        ActivityCollector.addActivity(this);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onResume() &#123;</div><div class="line">        super.onResume();</div><div class="line"></div><div class="line">        IntentFilter intentFilter = new IntentFilter();</div><div class="line">        intentFilter.addAction(&quot;com.example.admin.offline.FORCE_OFFLINE&quot;);</div><div class="line">        receive = new ForceOfflineReceive();</div><div class="line">        registerReceiver(receive, intentFilter);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onPause() &#123;</div><div class="line">        super.onPause();</div><div class="line">        if(receive != null)&#123;</div><div class="line">            unregisterReceiver(receive);</div><div class="line">            receive = null;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onDestroy() &#123;</div><div class="line">        super.onDestroy();</div><div class="line">        ActivityCollector.removeActivity(this);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    class ForceOfflineReceive extends BroadcastReceiver&#123;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void onReceive(final Context context, Intent intent) &#123;</div><div class="line"></div><div class="line">            AlertDialog.Builder builder = new AlertDialog.Builder(context);</div><div class="line">            builder.setTitle(&quot;Warning&quot;);</div><div class="line">            builder.setMessage(&quot;You are force to be offline. Please try to login again.&quot;);</div><div class="line">            builder.setPositiveButton(&quot;OK&quot;, new DialogInterface.OnClickListener() &#123;</div><div class="line">                @Override</div><div class="line">                public void onClick(DialogInterface dialog, int which) &#123;</div><div class="line"></div><div class="line">                    ActivityCollector.finishAll();</div><div class="line">                    Intent intent = new Intent(context, MainActivity.class);</div><div class="line">                    context.startActivity(intent);</div><div class="line">                &#125;</div><div class="line">            &#125;);</div><div class="line">            builder.show();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>（3）MainActivity 代码（登录界面的Activity）</strong><br>记住密码功能用的是数据存储的 <strong>SharedPrefreferences</strong> 存储方式。使用 <strong>SharedPrefreferences</strong> 的 <strong>put</strong> 和 <strong>get</strong> 方法保存和存取数据。<br>还用到了一个新控件，CheckBox。这是一个复选框控件，用户可以通过点击的方 式来进行选中和取消，使用这个控件来表示用户是否需要记住密码。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre></td><td class="code"><pre><div class="line">public class MainActivity extends BaseActivity &#123;</div><div class="line"></div><div class="line">    private EditText accountEdit;</div><div class="line">    private EditText passwordEdit;</div><div class="line">    private Button login;</div><div class="line"></div><div class="line"></div><div class="line">    private SharedPreferences pref;</div><div class="line">    private SharedPreferences.Editor editor;</div><div class="line">    private CheckBox rememberPass;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line"></div><div class="line">        pref = PreferenceManager.getDefaultSharedPreferences(this);</div><div class="line"></div><div class="line">        accountEdit = (EditText)findViewById(R.id.account);</div><div class="line">        passwordEdit = (EditText)findViewById(R.id.password);</div><div class="line">        login = (Button)findViewById(R.id.login);</div><div class="line">        rememberPass = (CheckBox)findViewById(R.id.remember_pass);</div><div class="line"></div><div class="line">        boolean isRemember = pref.getBoolean(&quot;remember_password&quot;, false);</div><div class="line">        if(isRemember)&#123;</div><div class="line">            String account = pref.getString(&quot;account&quot;,&quot;&quot;);</div><div class="line">            String password = pref.getString(&quot;password&quot;,&quot;&quot;);</div><div class="line">            accountEdit.setText(account);</div><div class="line">            passwordEdit.setText(password);</div><div class="line">            rememberPass.setChecked(true);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        login.setOnClickListener(new View.OnClickListener() &#123;</div><div class="line">            @Override</div><div class="line">            public void onClick(View v) &#123;</div><div class="line"></div><div class="line">                String account = accountEdit.getText().toString();</div><div class="line">                String password = passwordEdit.getText().toString();</div><div class="line"></div><div class="line">                if(account.equals(&quot;admin&quot;) &amp;&amp; password.equals(&quot;123456&quot;))&#123;</div><div class="line"></div><div class="line">                    editor = pref.edit();</div><div class="line">                    if(rememberPass.isChecked())&#123;  //是否被选中</div><div class="line">                        editor.putBoolean(&quot;remember_password&quot;,true);</div><div class="line">                        editor.putString(&quot;account&quot;,account);</div><div class="line">                        editor.putString(&quot;password&quot;,password);</div><div class="line">                    &#125;else&#123;</div><div class="line">                        editor.clear();</div><div class="line">                    &#125;</div><div class="line">                    editor.apply();</div><div class="line"></div><div class="line"></div><div class="line">                    Intent intent = new Intent(MainActivity.this,LoginActivity.class);</div><div class="line">                    startActivity(intent);</div><div class="line">                    finish();</div><div class="line">                &#125;else&#123;</div><div class="line">                    Toast.makeText(MainActivity.this,</div><div class="line">                            &quot;acount or password is invalid&quot;, Toast.LENGTH_SHORT).show();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>（4）LoginActivity 代码（下线界面的Activity）</strong><br>这段很简单，按钮发送下线广播触发下线<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">public class LoginActivity extends BaseActivity &#123;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_login);</div><div class="line"></div><div class="line">        Button offline = (Button)findViewById(R.id.offline);</div><div class="line">        offline.setOnClickListener(new View.OnClickListener() &#123;</div><div class="line">            @Override</div><div class="line">            public void onClick(View v) &#123;</div><div class="line"></div><div class="line">                Toast.makeText(LoginActivity.this,&quot;OK&quot;,Toast.LENGTH_SHORT).show();</div><div class="line">                Intent intent = new Intent(&quot;com.example.admin.offline.FORCE_OFFLINE&quot;);</div><div class="line">                sendBroadcast(intent);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="然后"><a href="#然后" class="headerlink" title="然后"></a>然后</h3><p>然后就没了啊。挺简单的。（自言自语）</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android入门/" rel="tag"># Android入门</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/04/Android-广播机制/" rel="next" title="Android 广播机制">
+                <i class="fa fa-chevron-left"></i> Android 广播机制
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/sasha.jpg"
+               alt="GPeng" />
+          <p class="site-author-name" itemprop="name">GPeng</p>
+           
+              <p class="site-description motion-element" itemprop="description">Thank  You  Simple  Life</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/MyAshe" target="_blank" title="Github">
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/5712602930" target="_blank" title="微博">
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/ben-yu-61-53/activities" target="_blank" title="知乎">
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Android-实现记住密码和强制下线功能"><span class="nav-number">1.</span> <span class="nav-text">Android 实现记住密码和强制下线功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-实现的界面"><span class="nav-number">1.0.1.</span> <span class="nav-text">1.实现的界面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-实现的功能"><span class="nav-number">1.0.2.</span> <span class="nav-text">2.实现的功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-界面代码"><span class="nav-number">1.0.3.</span> <span class="nav-text">3.界面代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Activity代码"><span class="nav-number">1.0.4.</span> <span class="nav-text">Activity代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#然后"><span class="nav-number">1.1.</span> <span class="nav-text">然后</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GPeng</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
