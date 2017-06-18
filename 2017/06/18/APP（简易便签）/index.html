@@ -1,0 +1,749 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android 项目," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="##一个简易便签代码有一大部分是借鉴别人的，赶时间为了完成任务，所以直接抄了很多。就是一个很简易的便签，主要用到的技术就是数据库的技术。界面很简洁，亲自设计。然后就把代码放在这里吧。 ###1.界面布局 ####（1）主界面 ####（2）新建界面 ####（3）删除界面 ####（4）分享界面 ###2.布局代码实现 ####（1）主界面的布局12345678910111213141516171">
+<meta name="keywords" content="Android 项目">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Y Augerlmir">
+<meta property="og:url" content="http://yoursite.com/2017/06/18/APP（简易便签）/index.html">
+<meta property="og:site_name" content="Y Augerlmir">
+<meta property="og:description" content="##一个简易便签代码有一大部分是借鉴别人的，赶时间为了完成任务，所以直接抄了很多。就是一个很简易的便签，主要用到的技术就是数据库的技术。界面很简洁，亲自设计。然后就把代码放在这里吧。 ###1.界面布局 ####（1）主界面 ####（2）新建界面 ####（3）删除界面 ####（4）分享界面 ###2.布局代码实现 ####（1）主界面的布局12345678910111213141516171">
+<meta property="og:image" content="http://img.blog.csdn.net/20170618170746448?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY3MDkxNTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170618170859681?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY3MDkxNTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170618170931291?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY3MDkxNTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170618171013981?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY3MDkxNTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-06-18T09:17:49.549Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Y Augerlmir">
+<meta name="twitter:description" content="##一个简易便签代码有一大部分是借鉴别人的，赶时间为了完成任务，所以直接抄了很多。就是一个很简易的便签，主要用到的技术就是数据库的技术。界面很简洁，亲自设计。然后就把代码放在这里吧。 ###1.界面布局 ####（1）主界面 ####（2）新建界面 ####（3）删除界面 ####（4）分享界面 ###2.布局代码实现 ####（1）主界面的布局12345678910111213141516171">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170618170746448?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY3MDkxNTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/18/APP（简易便签）/"/>
+
+
+
+
+
+  <title> | Y Augerlmir</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Y Augerlmir</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/18/APP（简易便签）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="GPeng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/sasha.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Y Augerlmir">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-18T17:16:21+08:00">
+                2017-06-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>##一个简易便签<br>代码有一大部分是借鉴别人的，赶时间为了完成任务，所以直接抄了很多。<br>就是一个很简易的便签，主要用到的技术就是数据库的技术。界面很简洁，亲自设计。<br>然后就把代码放在这里吧。</p>
+<p>###1.界面布局</p>
+<p>####（1）主界面<br><img src="http://img.blog.csdn.net/20170618170746448?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY3MDkxNTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" width="280/"></p>
+<p>####（2）新建界面<br><img src="http://img.blog.csdn.net/20170618170859681?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY3MDkxNTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" width="280/"></p>
+<p>####（3）删除界面<br><img src="http://img.blog.csdn.net/20170618170931291?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY3MDkxNTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" width="280/"></p>
+<p>####（4）分享界面<br><img src="http://img.blog.csdn.net/20170618171013981?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY3MDkxNTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" width="280/"></p>
+<p>###2.布局代码实现</p>
+<p>####（1）主界面的布局<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">xmlns:tools=&quot;http://schemas.android.com/tools&quot;</div><div class="line">android:layout_width=&quot;match_parent&quot;</div><div class="line">android:layout_height=&quot;match_parent&quot;</div><div class="line">android:background=&quot;#efefef&quot;</div><div class="line">android:paddingLeft=&quot;13dp&quot;</div><div class="line">android:paddingRight=&quot;13dp&quot;</div><div class="line">android:paddingBottom=&quot;5dp&quot;</div><div class="line">android:paddingTop=&quot;5dp&quot;</div><div class="line">tools:context=&quot;.MainActivity&quot; &gt;</div><div class="line"></div><div class="line">&lt;ListView</div><div class="line">    android:id=&quot;@+id/lv_bwlList&quot;</div><div class="line">    android:divider=&quot;#00000000&quot;</div><div class="line">    android:dividerHeight=&quot;9dp&quot;</div><div class="line">    android:layout_width=&quot;match_parent&quot;</div><div class="line">    android:layout_height=&quot;match_parent&quot;/&gt;</div><div class="line"></div><div class="line">&lt;ImageButton</div><div class="line">    android:id=&quot;@+id/btnAdd&quot;</div><div class="line">    android:layout_width=&quot;70dp&quot;</div><div class="line">    android:layout_height=&quot;70dp&quot;</div><div class="line">    android:scaleType=&quot;centerCrop&quot;</div><div class="line">    android:src=&quot;@mipmap/addd&quot;</div><div class="line">    android:alpha=&quot;70&quot;</div><div class="line">    android:background=&quot;#00ffffff&quot;</div><div class="line">    android:layout_margin=&quot;10dp&quot;</div><div class="line">    android:layout_centerHorizontal=&quot;true&quot;</div><div class="line">    android:layout_alignParentBottom=&quot;true&quot;/&gt;</div><div class="line"></div><div class="line">&lt;/RelativeLayout&gt;</div></pre></td></tr></table></figure></p>
+<p>####（2）新建界面的布局<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    android:layout_width=&quot;match_parent&quot;</div><div class="line">    android:layout_height=&quot;match_parent&quot;</div><div class="line">    android:orientation=&quot;vertical&quot;</div><div class="line">    android:layout_margin=&quot;10dp&quot;&gt;</div><div class="line"></div><div class="line">    &lt;LinearLayout</div><div class="line">        android:layout_width=&quot;match_parent&quot;</div><div class="line">        android:layout_height=&quot;0dp&quot;</div><div class="line">        android:layout_weight=&quot;1&quot;</div><div class="line">        android:orientation=&quot;vertical&quot;</div><div class="line">        android:weightSum=&quot;1&quot;&gt;</div><div class="line"></div><div class="line">        &lt;TextView</div><div class="line">            android:id=&quot;@+id/textView1&quot;</div><div class="line">            android:textSize=&quot;20sp&quot;</div><div class="line">            android:textColor=&quot;#636363&quot;</div><div class="line">            android:layout_marginTop=&quot;10dp&quot;</div><div class="line">            android:layout_width=&quot;wrap_content&quot;</div><div class="line">            android:layout_height=&quot;wrap_content&quot;</div><div class="line">            android:text=&quot;@string/title&quot; /&gt;</div><div class="line"></div><div class="line">        &lt;EditText</div><div class="line">            android:id=&quot;@+id/editText1&quot;</div><div class="line">            android:layout_width=&quot;match_parent&quot;</div><div class="line">            android:layout_height=&quot;40dp&quot;</div><div class="line">            android:layout_marginTop=&quot;5dp&quot;</div><div class="line">            android:layout_marginBottom=&quot;5dp&quot;</div><div class="line">            android:paddingLeft=&quot;5dp&quot;</div><div class="line">            android:textColor=&quot;#626366&quot;</div><div class="line">            android:background=&quot;@null&quot;</div><div class="line">            android:ems=&quot;10&quot;&gt;</div><div class="line">            &lt;requestFocus /&gt;</div><div class="line">        &lt;/EditText&gt;</div><div class="line"></div><div class="line">        &lt;TextView</div><div class="line">            android:id=&quot;@+id/textView2&quot;</div><div class="line">            android:textSize=&quot;20sp&quot;</div><div class="line">            android:textColor=&quot;#636363&quot;</div><div class="line">            android:layout_width=&quot;wrap_content&quot;</div><div class="line">            android:layout_height=&quot;wrap_content&quot;</div><div class="line">            android:text=&quot;@string/content&quot; /&gt;</div><div class="line"></div><div class="line">        &lt;EditText</div><div class="line">            android:id=&quot;@+id/editText2&quot;</div><div class="line">            android:layout_width=&quot;match_parent&quot;</div><div class="line">            android:layout_height=&quot;match_parent&quot;</div><div class="line">            android:gravity=&quot;top&quot;</div><div class="line">            android:textColor=&quot;#626366&quot;</div><div class="line">            android:background=&quot;@null&quot;</div><div class="line">            android:layout_marginTop=&quot;12dp&quot;</div><div class="line">            android:layout_marginBottom=&quot;5dp&quot;</div><div class="line">            android:paddingLeft=&quot;5dp&quot; /&gt;</div><div class="line"></div><div class="line">    &lt;/LinearLayout&gt;</div><div class="line"></div><div class="line">    &lt;ImageButton</div><div class="line">        android:id=&quot;@+id/saveButton&quot;</div><div class="line">        android:layout_width=&quot;70dp&quot;</div><div class="line">        android:layout_height=&quot;70dp&quot;</div><div class="line">        android:scaleType=&quot;centerCrop&quot;</div><div class="line">        android:src=&quot;@mipmap/save&quot;</div><div class="line">        android:alpha=&quot;70&quot;</div><div class="line">        android:background=&quot;#00ffffff&quot;</div><div class="line">        android:layout_margin=&quot;10dp&quot;</div><div class="line">        android:layout_gravity=&quot;center&quot;/&gt;</div><div class="line"></div><div class="line">&lt;/LinearLayout&gt;</div></pre></td></tr></table></figure></p>
+<p>####（3）ListView子项布局<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    android:orientation=&quot;horizontal&quot;</div><div class="line">    android:layout_width=&quot;match_parent&quot;</div><div class="line">    android:layout_height=&quot;wrap_content&quot;</div><div class="line">    android:background=&quot;#FFFFFF&quot;&gt;</div><div class="line"></div><div class="line">    &lt;TextView</div><div class="line">        android:id=&quot;@+id/textView1&quot;</div><div class="line">        android:layout_width=&quot;0dp&quot;</div><div class="line">        android:layout_height=&quot;90dp&quot;</div><div class="line">        android:layout_weight=&quot;1&quot;</div><div class="line">        android:paddingLeft=&quot;15dp&quot;</div><div class="line">        android:textColor=&quot;#3d3d3d&quot;</div><div class="line">        android:gravity=&quot;center_vertical&quot;</div><div class="line">        android:textSize=&quot;16sp&quot;</div><div class="line">        android:text=&quot;@string/title2&quot; /&gt;</div><div class="line"></div><div class="line">    &lt;TextView</div><div class="line">        android:id=&quot;@+id/textView2&quot;</div><div class="line">        android:textSize=&quot;13sp&quot;</div><div class="line">        android:layout_width=&quot;wrap_content&quot;</div><div class="line">        android:layout_height=&quot;90dp&quot;</div><div class="line">        android:gravity=&quot;center&quot;</div><div class="line">        android:paddingRight=&quot;10dp&quot;</div><div class="line">        android:text=&quot;@string/time&quot; /&gt;</div><div class="line"></div><div class="line">&lt;/LinearLayout&gt;</div></pre></td></tr></table></figure></p>
+<p>###2.菜单代码实现</p>
+<p>####（1）主界面菜单<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;menu xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</div><div class="line"></div><div class="line">    &lt;item</div><div class="line">        android:id=&quot;@+id/item1&quot;</div><div class="line">        android:orderInCategory=&quot;100&quot;</div><div class="line">        android:showAsAction=&quot;never&quot;</div><div class="line">        android:title=&quot;@string/New&quot;/&gt;</div><div class="line">    &lt;item</div><div class="line">        android:id=&quot;@+id/item2&quot;</div><div class="line">        android:orderInCategory=&quot;100&quot;</div><div class="line">        android:showAsAction=&quot;never&quot;</div><div class="line">        android:title=&quot;@string/back&quot;/&gt;</div><div class="line"></div><div class="line">&lt;/menu&gt;</div></pre></td></tr></table></figure></p>
+<p>####（2）新建界面菜单<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;menu xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</div><div class="line"></div><div class="line">    &lt;item</div><div class="line">        android:id=&quot;@+id/action_settings&quot;</div><div class="line">        android:orderInCategory=&quot;100&quot;</div><div class="line">        android:showAsAction=&quot;never&quot;</div><div class="line">        android:title=&quot;@string/share&quot;/&gt;</div><div class="line"></div><div class="line">&lt;/menu&gt;</div></pre></td></tr></table></figure></p>
+<p>###3.数据库代码实现</p>
+<p>####（1）存放数据的类<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">public class Cuns &#123;</div><div class="line"></div><div class="line">    private String title;   //标题</div><div class="line">    private String content; //内容</div><div class="line">    private String times;   //时间</div><div class="line">    private int ids;        //编号</div><div class="line"></div><div class="line">    public Cuns(String ti,int id,String con ,String time)&#123;</div><div class="line">        this.ids=id;</div><div class="line">        this.title=ti;</div><div class="line">        this.content=con;</div><div class="line">        this.times=time;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Cuns(String ti,String con,String time)&#123;</div><div class="line">        this.title=ti;</div><div class="line">        this.content=con;</div><div class="line">        this.times=time;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Cuns(int i,String ti,String time)&#123;</div><div class="line">        this.ids=i;</div><div class="line">        this.title=ti;</div><div class="line">        this.times=time;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Cuns(String ti,String con)&#123;</div><div class="line">        this.title=ti;</div><div class="line">        this.content=con;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public int getIds() &#123;</div><div class="line">        return ids;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public String getTitle() &#123;</div><div class="line">        return title;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public String getContent() &#123;</div><div class="line">        return content;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public String getTimes() &#123;</div><div class="line">        return times;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>####（2）新建 MyOpenHelper 类继承自 SQLiteOpenHelper 类<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line"> * 重写了SQLiteOpenHelper类，用来建立数据库和表</div><div class="line"> */</div><div class="line">public class MyOpenHelper extends SQLiteOpenHelper&#123;</div><div class="line"></div><div class="line">    public MyOpenHelper(Context context) &#123;</div><div class="line">        super(context, &quot;mydate&quot;, null, 1);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onCreate(SQLiteDatabase db) &#123;</div><div class="line">        db.execSQL(&quot;create table mybook(&quot; +</div><div class="line">                &quot;ids integer PRIMARY KEY autoincrement,&quot; +</div><div class="line">                &quot;title text,&quot; +</div><div class="line">                &quot;content text,&quot; +</div><div class="line">                &quot;times text)&quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>####（3）新建 MyDataBase 类用来操作数据库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div></pre></td><td class="code"><pre><div class="line">public class MyDataBase &#123;</div><div class="line"></div><div class="line">    Context context;</div><div class="line">    MyOpenHelper myHelper;</div><div class="line">    SQLiteDatabase myDatabase;</div><div class="line">    /*</div><div class="line">     * 别的类实例化这个类的同时，创建数据库</div><div class="line">     */</div><div class="line">    public MyDataBase(Context con)&#123;</div><div class="line">        this.context=con;</div><div class="line">        myHelper=new MyOpenHelper(context);</div><div class="line">    &#125;</div><div class="line">    /*</div><div class="line">     * 得到ListView的数据，从数据库里查找后解析</div><div class="line">     */</div><div class="line">    public ArrayList&lt;Cuns&gt; getArray()&#123;</div><div class="line">        ArrayList&lt;Cuns&gt; array = new ArrayList&lt;Cuns&gt;();</div><div class="line">        ArrayList&lt;Cuns&gt; array1 = new ArrayList&lt;Cuns&gt;();</div><div class="line">        myDatabase = myHelper.getWritableDatabase();</div><div class="line">        Cursor cursor=myDatabase.rawQuery(&quot;select ids,title,times from mybook&quot; , null);</div><div class="line">        cursor.moveToFirst();</div><div class="line">        while(!cursor.isAfterLast())&#123;</div><div class="line">            int id = cursor.getInt(cursor.getColumnIndex(&quot;ids&quot;));</div><div class="line">            String title = cursor.getString(cursor.getColumnIndex(&quot;title&quot;));</div><div class="line">            String times = cursor.getString(cursor.getColumnIndex(&quot;times&quot;));</div><div class="line">            Cuns cun = new Cuns(id, title, times);</div><div class="line">            array.add(cun);</div><div class="line">            cursor.moveToNext();</div><div class="line">        &#125;</div><div class="line">        myDatabase.close();</div><div class="line">        for (int i = array.size(); i &gt;0; i--) &#123;</div><div class="line">            array1.add(array.get(i-1));</div><div class="line">        &#125;</div><div class="line">        return array1;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /*</div><div class="line">     * 返回可能要修改的数据</div><div class="line">     */</div><div class="line">    public Cuns getTiandCon(int id)&#123;</div><div class="line">        myDatabase = myHelper.getWritableDatabase();</div><div class="line">        Cursor cursor=myDatabase.rawQuery(&quot;select title,content from mybook where ids=&apos;&quot;+id+&quot;&apos;&quot; , null);</div><div class="line">        cursor.moveToFirst();</div><div class="line">        String title=cursor.getString(cursor.getColumnIndex(&quot;title&quot;));</div><div class="line">        String content=cursor.getString(cursor.getColumnIndex(&quot;content&quot;));</div><div class="line">        Cuns cun=new Cuns(title,content);</div><div class="line">        myDatabase.close();</div><div class="line">        return cun;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /*</div><div class="line">     * 用来修改日记</div><div class="line">     */</div><div class="line">    public void toUpdate(Cuns cun)&#123;</div><div class="line">        myDatabase = myHelper.getWritableDatabase();</div><div class="line">        myDatabase.execSQL(</div><div class="line">                &quot;update mybook set title=&apos;&quot;+ cun.getTitle()+</div><div class="line">                &quot;&apos;,times=&apos;&quot;+cun.getTimes()+</div><div class="line">                &quot;&apos;,content=&apos;&quot;+cun.getContent() +</div><div class="line">                &quot;&apos; where ids=&apos;&quot;+ cun.getIds()+&quot;&apos;&quot;);</div><div class="line">        myDatabase.close();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /*</div><div class="line">     * 用来增加新的日记</div><div class="line">     */</div><div class="line">    public void toInsert(Cuns cun)&#123;</div><div class="line">        myDatabase = myHelper.getWritableDatabase();</div><div class="line">        myDatabase.execSQL(&quot;insert into mybook(title,content,times)values(&apos;&quot;</div><div class="line">                + cun.getTitle()+&quot;&apos;,&apos;&quot;</div><div class="line">                +cun.getContent()+&quot;&apos;,&apos;&quot;</div><div class="line">                +cun.getTimes()</div><div class="line">                +&quot;&apos;)&quot;);</div><div class="line">        myDatabase.close();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /*</div><div class="line">     * 长按点击后选择删除日记</div><div class="line">     */</div><div class="line">    public void toDelete(int ids)&#123;</div><div class="line">        myDatabase  = myHelper.getWritableDatabase();</div><div class="line">        myDatabase.execSQL(&quot;delete from mybook where ids=&quot;+ids+&quot;&quot;);</div><div class="line">        myDatabase.close();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>###4.自定义 Adapter<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line"> * 自定义的ListView的Adapter</div><div class="line"> */</div><div class="line">public class MyAdapter extends BaseAdapter&#123;</div><div class="line"></div><div class="line">    LayoutInflater inflater;</div><div class="line">    ArrayList&lt;Cuns&gt; array;</div><div class="line"></div><div class="line">    public MyAdapter(LayoutInflater inf,ArrayList&lt;Cuns&gt; arry)&#123;</div><div class="line">        this.inflater=inf;</div><div class="line">        this.array=arry;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public int getCount() &#123;</div><div class="line">        return array.size();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public Object getItem(int position) &#123;</div><div class="line">        return array.get(position);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public long getItemId(int position) &#123;</div><div class="line">        return position;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public View getView(int position, View convertView, ViewGroup parent) &#123;</div><div class="line">        ViewHolder vh;</div><div class="line">        if(convertView==null)&#123;</div><div class="line">            vh=new ViewHolder();</div><div class="line">            convertView=inflater.inflate(R.layout.list_item, null);//注意导包，别导系统包</div><div class="line">            vh.tv1=(TextView) convertView.findViewById(R.id.textView1);</div><div class="line">            vh.tv2=(TextView) convertView.findViewById(R.id.textView2);</div><div class="line">            convertView.setTag(vh);</div><div class="line">        &#125;</div><div class="line">        vh=(ViewHolder) convertView.getTag();</div><div class="line">        vh.tv1.setText(array.get(position).getTitle());</div><div class="line">        vh.tv2.setText(array.get(position).getTimes());</div><div class="line">        return convertView;</div><div class="line">    &#125;</div><div class="line">    class ViewHolder&#123;</div><div class="line">        TextView tv1,tv2;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>###5.Activity代码实现</p>
+<p>####（1）主界面 Activity 代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line"> * 这个类主要包括五个点击事件，分别为</div><div class="line"> * ListView的长按点击事件，用来AlertDialog来判断是否删除数据。</div><div class="line"> * ListView的点击事件，跳转到第二个界面，用来修改数据</div><div class="line"> * 新建便签按钮的点击事件，跳转到第二界面，用来新建便签</div><div class="line"> * menu里的退出事件，用来退出程序</div><div class="line"> * menu里的新建事件，用来新建便签</div><div class="line"> */</div><div class="line"></div><div class="line">public class MainActivity extends AppCompatActivity &#123;</div><div class="line">    </div><div class="line">    ImageButton imageButton;</div><div class="line">    ListView lv;</div><div class="line">    LayoutInflater inflater;</div><div class="line">    ArrayList&lt;Cuns&gt; array;</div><div class="line">    MyDataBase mdb;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line">        lv=(ListView) findViewById(R.id.lv_bwlList);</div><div class="line">        imageButton=(ImageButton) findViewById(R.id.btnAdd);</div><div class="line">        inflater=getLayoutInflater();</div><div class="line"></div><div class="line">        mdb=new MyDataBase(this);</div><div class="line">        array=mdb.getArray();</div><div class="line">        MyAdapter adapter=new MyAdapter(inflater,array);</div><div class="line">        lv.setAdapter(adapter);</div><div class="line">		/*</div><div class="line">		 * 点击listView里面的item,用来修改日记</div><div class="line">		 */</div><div class="line">        lv.setOnItemClickListener(new OnItemClickListener() &#123;</div><div class="line">            @Override</div><div class="line">            public void onItemClick(AdapterView&lt;?&gt; parent, View view,</div><div class="line">                                    int position, long id) &#123;</div><div class="line">                // TODO Auto-generated method stub</div><div class="line">                Intent intent=new Intent(getApplicationContext(),NewNote.class);</div><div class="line">                intent.putExtra(&quot;ids&quot;,array.get(position).getIds() );</div><div class="line">                startActivity(intent);</div><div class="line">                MainActivity.this.finish();</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">		/*</div><div class="line">		 * 长点后来判断是否删除数据</div><div class="line">		 */</div><div class="line">        lv.setOnItemLongClickListener(new OnItemLongClickListener() &#123;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public boolean onItemLongClick(AdapterView&lt;?&gt; parent, View view,</div><div class="line">                                           final int position, long id) &#123;</div><div class="line">                //AlertDialog,来判断是否删除日记。</div><div class="line">                new AlertDialog.Builder(MainActivity.this)</div><div class="line">                        .setTitle(&quot;删除&quot;)</div><div class="line">                        .setMessage(&quot;是否删除笔记&quot;)</div><div class="line">                        .setNegativeButton(&quot;取消&quot;, new DialogInterface.OnClickListener() &#123;</div><div class="line"></div><div class="line">                            @Override</div><div class="line">                            public void onClick(DialogInterface dialog, int which) &#123;</div><div class="line"></div><div class="line">                            &#125;</div><div class="line">                        &#125;)</div><div class="line">                        .setPositiveButton(&quot;确定&quot;, new DialogInterface.OnClickListener() &#123;</div><div class="line"></div><div class="line">                            @Override</div><div class="line">                            public void onClick(DialogInterface dialog, int which) &#123;</div><div class="line">                                mdb.toDelete(array.get(position).getIds());</div><div class="line">                                array=mdb.getArray();</div><div class="line">                                MyAdapter adapter=new MyAdapter(inflater,array);</div><div class="line">                                lv.setAdapter(adapter);</div><div class="line">                            &#125;</div><div class="line">                        &#125;)</div><div class="line">                        .create().show();</div><div class="line">                return true;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">		/*</div><div class="line">		 * 按钮点击事件，用来新建日记</div><div class="line">		 */</div><div class="line">        imageButton.setOnClickListener(new OnClickListener() &#123;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public void onClick(View v) &#123;</div><div class="line">                Intent intent=new Intent(getApplicationContext(),NewNote.class);</div><div class="line">                startActivity(intent);</div><div class="line">                MainActivity.this.finish();</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public boolean onCreateOptionsMenu(Menu menu) &#123;</div><div class="line"></div><div class="line">        getMenuInflater().inflate(R.menu.main, menu);</div><div class="line">        return true;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public boolean onOptionsItemSelected(MenuItem item) &#123;</div><div class="line">        switch (item.getItemId()) &#123;</div><div class="line">            case R.id.item1:</div><div class="line">                Intent intent=new Intent(getApplicationContext(),NewNote.class);</div><div class="line">                startActivity(intent);</div><div class="line">                this.finish();</div><div class="line">                break;</div><div class="line">            case R.id.item2:</div><div class="line">                this.finish();</div><div class="line">                break;</div><div class="line">            default:</div><div class="line">                break;</div><div class="line">        &#125;</div><div class="line">        return true;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>####（2）新建界面 Activity 代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div></pre></td><td class="code"><pre><div class="line">public class NewNote extends AppCompatActivity &#123;</div><div class="line"></div><div class="line">    EditText ed1,ed2;</div><div class="line">    ImageButton imageButton;</div><div class="line">    MyDataBase myDatabase;</div><div class="line">    Cuns cun;</div><div class="line">    int ids;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_new_note);</div><div class="line">        ed1=(EditText) findViewById(R.id.editText1);</div><div class="line">        ed2=(EditText) findViewById(R.id.editText2);</div><div class="line">        imageButton=(ImageButton) findViewById(R.id.saveButton);</div><div class="line">        myDatabase=new MyDataBase(this);</div><div class="line"></div><div class="line">        Intent intent=this.getIntent();</div><div class="line">        ids=intent.getIntExtra(&quot;ids&quot;, 0);</div><div class="line">        //默认为0，不为0,则为修改数据时跳转过来的</div><div class="line">        if(ids!=0)&#123;</div><div class="line">            cun=myDatabase.getTiandCon(ids);</div><div class="line">            ed1.setText(cun.getTitle());</div><div class="line">            ed2.setText(cun.getContent());</div><div class="line">        &#125;</div><div class="line">        //保存按钮的点击事件，他和返回按钮是一样的功能，所以都调用isSave()方法；</div><div class="line">        imageButton.setOnClickListener(new OnClickListener() &#123;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public void onClick(View v) &#123;</div><div class="line">                isSave();</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /*</div><div class="line">     * 返回按钮调用的方法。</div><div class="line">     */</div><div class="line">    @Override</div><div class="line">    public void onBackPressed() &#123;</div><div class="line">        //super.onBackPressed();</div><div class="line">        SimpleDateFormat formatter = new SimpleDateFormat(&quot;yyyy.MM.dd  HH:mm:ss&quot;);</div><div class="line">        Date curDate = new Date(System.currentTimeMillis());//获取当前时间</div><div class="line">        String times = formatter.format(curDate);</div><div class="line">        String title=ed1.getText().toString();</div><div class="line">        String content=ed2.getText().toString();</div><div class="line">        //是要修改数据</div><div class="line">        if(ids!=0)&#123;</div><div class="line">            cun=new Cuns(title,ids, content, times);</div><div class="line">            myDatabase.toUpdate(cun);</div><div class="line">            Intent intent=new Intent(NewNote.this,MainActivity.class);</div><div class="line">            startActivity(intent);</div><div class="line">            NewNote.this.finish();</div><div class="line">        &#125;</div><div class="line">        //新建日记</div><div class="line">        else&#123;</div><div class="line">            if(title.equals(&quot;&quot;)&amp;&amp;content.equals(&quot;&quot;))&#123;</div><div class="line">                Intent intent=new Intent(NewNote.this,MainActivity.class);</div><div class="line">                startActivity(intent);</div><div class="line">                NewNote.this.finish();</div><div class="line">            &#125;</div><div class="line">            else&#123;</div><div class="line">                cun=new Cuns(title,content,times);</div><div class="line">                myDatabase.toInsert(cun);</div><div class="line">                Intent intent=new Intent(NewNote.this,MainActivity.class);</div><div class="line">                startActivity(intent);</div><div class="line">                NewNote.this.finish();</div><div class="line">            &#125;</div><div class="line"></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    private void isSave()&#123;</div><div class="line">        SimpleDateFormat formatter = new SimpleDateFormat(&quot;yyyy.MM.dd  HH:mm:ss&quot;);</div><div class="line">        Date curDate = new Date(System.currentTimeMillis());//获取当前时间</div><div class="line">        String times = formatter.format(curDate);</div><div class="line">        String title=ed1.getText().toString();</div><div class="line">        String content=ed2.getText().toString();</div><div class="line">        //是要修改数据</div><div class="line">        if(ids!=0)&#123;</div><div class="line">            cun=new Cuns(title,ids, content, times);</div><div class="line">            myDatabase.toUpdate(cun);</div><div class="line">            Intent intent=new Intent(NewNote.this,MainActivity.class);</div><div class="line">            startActivity(intent);</div><div class="line">            NewNote.this.finish();</div><div class="line">        &#125;</div><div class="line">        //新建日记</div><div class="line">        else&#123;</div><div class="line">            cun=new Cuns(title,content,times);</div><div class="line">            myDatabase.toInsert(cun);</div><div class="line">            Intent intent=new Intent(NewNote.this,MainActivity.class);</div><div class="line">            startActivity(intent);</div><div class="line">            NewNote.this.finish();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    @Override</div><div class="line">    public boolean onCreateOptionsMenu(Menu menu) &#123;</div><div class="line"></div><div class="line">        getMenuInflater().inflate(R.menu.second, menu);</div><div class="line">        return true;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public boolean onOptionsItemSelected(MenuItem item) &#123;</div><div class="line">        switch (item.getItemId()) &#123;</div><div class="line">            case R.id.action_settings:</div><div class="line">                Intent intent=new Intent(Intent.ACTION_SEND);</div><div class="line">                intent.setType(&quot;text/plain&quot;);</div><div class="line">                intent.putExtra(Intent.EXTRA_TEXT,</div><div class="line">                        &quot;标题：&quot;+ed1.getText().toString()+&quot;    &quot; +</div><div class="line">                        &quot;内容：&quot;+ed2.getText().toString());</div><div class="line">                startActivity(intent);</div><div class="line">                break;</div><div class="line"></div><div class="line">            default:</div><div class="line">                break;</div><div class="line">        &#125;</div><div class="line">        return false;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>###6.附<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;resources&gt;</div><div class="line">    &lt;string name=&quot;app_name&quot;&gt;便签&lt;/string&gt;</div><div class="line">    &lt;string name=&quot;title&quot;&gt;标题:&lt;/string&gt;</div><div class="line">    &lt;string name=&quot;content&quot;&gt;内容:&lt;/string&gt;</div><div class="line">    &lt;string name=&quot;title2&quot;&gt;无标题:&lt;/string&gt;</div><div class="line">    &lt;string name=&quot;time&quot;&gt;年/月/日 时间&lt;/string&gt;</div><div class="line">    &lt;string name=&quot;New&quot;&gt;新建&lt;/string&gt;</div><div class="line">    &lt;string name=&quot;back&quot;&gt;退出&lt;/string&gt;</div><div class="line">    &lt;string name=&quot;share&quot;&gt;分享&lt;/string&gt;</div><div class="line">&lt;/resources&gt;</div></pre></td></tr></table></figure></p>
+<p>###7.又是然后<br>该复习准备考试了啊！呵呵</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android-项目/" rel="tag"># Android 项目</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/11/Android 强制下线与记住密码功能/" rel="next" title="Android 实现记住密码和强制下线功能">
+                <i class="fa fa-chevron-left"></i> Android 实现记住密码和强制下线功能
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/sasha.jpg"
+               alt="GPeng" />
+          <p class="site-author-name" itemprop="name">GPeng</p>
+           
+              <p class="site-description motion-element" itemprop="description">Thank  You  Simple  Life</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/MyAshe" target="_blank" title="Github">
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/5712602930" target="_blank" title="微博">
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/ben-yu-61-53/activities" target="_blank" title="知乎">
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GPeng</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
