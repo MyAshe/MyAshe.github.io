@@ -93,17 +93,17 @@
 
 
 
-<meta name="description" content="ListView 性能优化 ListView 是一个挺难用的控件，为什么这样说，因为他有很多可以优化操作的细节，运行效率是 ListView 的一个很重要的指标。当我们对 ListView 不进行任何优化时，在执行 Adapter 的 getView() 方法时，每次都将布局重新加载了一遍。代码如下：12345678@Overridepublic View getView(int position">
+<meta name="description" content="Android UI生成随机颜色以 TextView 举个栗子，我知道的两种简单的方法： 第一种方法利用 Color 类的 parseColor() 方法，这个方法传入的是颜色对应的代码，比如 #FFFFFF，所以要生成一个随机的这样的 String 对象就行了，代码：1234567891011TextView textView = (TextView)view.findViewById(R.id">
 <meta name="keywords" content="Android 入门">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ListView 性能优化">
-<meta property="og:url" content="http://yoursite.com/2017/05/08/ListView 性能优化/index.html">
+<meta property="og:title" content="Android UI生成随机颜色">
+<meta property="og:url" content="http://yoursite.com/2017/06/25/Android UI生成随机颜色/index.html">
 <meta property="og:site_name" content="Y Augerlmir">
-<meta property="og:description" content="ListView 性能优化 ListView 是一个挺难用的控件，为什么这样说，因为他有很多可以优化操作的细节，运行效率是 ListView 的一个很重要的指标。当我们对 ListView 不进行任何优化时，在执行 Adapter 的 getView() 方法时，每次都将布局重新加载了一遍。代码如下：12345678@Overridepublic View getView(int position">
-<meta property="og:updated_time" content="2017-06-05T08:42:21.072Z">
+<meta property="og:description" content="Android UI生成随机颜色以 TextView 举个栗子，我知道的两种简单的方法： 第一种方法利用 Color 类的 parseColor() 方法，这个方法传入的是颜色对应的代码，比如 #FFFFFF，所以要生成一个随机的这样的 String 对象就行了，代码：1234567891011TextView textView = (TextView)view.findViewById(R.id">
+<meta property="og:updated_time" content="2017-06-25T03:47:32.972Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ListView 性能优化">
-<meta name="twitter:description" content="ListView 性能优化 ListView 是一个挺难用的控件，为什么这样说，因为他有很多可以优化操作的细节，运行效率是 ListView 的一个很重要的指标。当我们对 ListView 不进行任何优化时，在执行 Adapter 的 getView() 方法时，每次都将布局重新加载了一遍。代码如下：12345678@Overridepublic View getView(int position">
+<meta name="twitter:title" content="Android UI生成随机颜色">
+<meta name="twitter:description" content="Android UI生成随机颜色以 TextView 举个栗子，我知道的两种简单的方法： 第一种方法利用 Color 类的 parseColor() 方法，这个方法传入的是颜色对应的代码，比如 #FFFFFF，所以要生成一个随机的这样的 String 对象就行了，代码：1234567891011TextView textView = (TextView)view.findViewById(R.id">
 
 
 
@@ -131,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/05/08/ListView 性能优化/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/06/25/Android UI生成随机颜色/"/>
 
 
 
 
 
-  <title>ListView 性能优化 | Y Augerlmir</title>
+  <title>Android UI生成随机颜色 | Y Augerlmir</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -267,7 +267,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/08/ListView 性能优化/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/25/Android UI生成随机颜色/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="GPeng">
@@ -284,7 +284,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">ListView 性能优化</h1>
+          <h1 class="post-title" itemprop="name headline">Android UI生成随机颜色</h1>
         
 
         <div class="post-meta">
@@ -296,8 +296,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-08T18:06:12+08:00">
-                2017-05-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-25T11:26:22+08:00">
+                2017-06-25
               </time>
             
 
@@ -353,17 +353,10 @@
       
 
       
-        <h3 id="ListView-性能优化"><a href="#ListView-性能优化" class="headerlink" title="ListView 性能优化"></a>ListView 性能优化</h3><hr>
-<p>ListView 是一个挺难用的控件，为什么这样说，因为他有很多可以优化操作的细节，运行效率是 ListView 的一个很重要的指标。当我们对 ListView 不进行任何优化时，在执行 <strong>Adapter</strong> 的<strong> getView() </strong>方法时，每次都将布局重新加载了一遍。<br>代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public View getView(int position, View convertView, ViewGroup parent) &#123;</div><div class="line">    Xxxx xxxx = getItem(position); // 获取实例（Xxxx为自定义布局）</div><div class="line">    View view = LayoutInflater.from(getContext()).inflate(resourceId,null);</div><div class="line">    ***</div><div class="line">    ***</div><div class="line">    return view;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<hr>
-<p>那要怎样对它进行优化？</p>
-<p><strong>方法一：</strong><br><strong>getView()</strong> 方法中有一个<strong> convertView </strong>参数，这个参数用于将之前加载好的布局进行缓存，以便之后可以进行重用。<br>修改代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public View getView(int position, View convertView, ViewGroup parent) &#123;</div><div class="line">    Xxxx xxxx = getItem(position);</div><div class="line">    View view; if (convertView == null) &#123;</div><div class="line">        view=LayoutInflater.from(getContext()).inflate(resourceId,null);</div><div class="line">    &#125; else &#123;</div><div class="line">        view = convertView;</div><div class="line">    &#125;</div><div class="line">    ***</div><div class="line">	***</div><div class="line">    return view;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>在 getView()方法中进行判断，如果 convertView为空，则使用 LayoutInflater 去加载布局，如果不为空则对 convertView进行重用。这样便提高了 ListView 的运行效率。</p>
-<p><strong>方法二：</strong><br>虽然通过 contentView 参数实现了复用，不会重复去加载布局， 但是每次在 getView() 方法中还是会调用 View 的 findViewById() 方法来获取一次控件的实例，怎样优化？<br>代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public View getView(int position, View convertView, ViewGroup parent) &#123;</div><div class="line">    Xxxx xxxx = getItem(position);</div><div class="line">    View view;</div><div class="line">    ViewHolder viewHolder;</div><div class="line">    if (convertView == null) &#123;</div><div class="line">        view = LayoutInflater.from(getContext()).inflate(resourceId,null);</div><div class="line">        viewHolder = new ViewHolder();</div><div class="line">        viewHolder.*** = ***   // 通过 findViewById()方法来获取控件实例</div><div class="line">        ***</div><div class="line">        view.setTag(viewHolder); // 将ViewHolder存储在View中</div><div class="line">    &#125; else &#123;</div><div class="line">        view = convertView;</div><div class="line">        viewHolder = (ViewHolder) view.getTag(); // 把 ViewHolder重新取出</div><div class="line">    &#125;</div><div class="line">    viewHolder.*** = ***</div><div class="line">    return view;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//内部类，对控件实例缓存</div><div class="line">class ViewHolder &#123;</div><div class="line">    ***</div><div class="line">    //布局里面的控件内容</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>当 convertView为空 的时候，创建一个 ViewHolder对象，并将控件的实例都存放在 ViewHolder里，然后调用 View 的 setTag()方法，将 ViewHolder对象存储在 View中。当 convertView不为空的时候则调用 View的 getTag()方法，把 ViewHolder重新取出。这样所有控件的实例都缓存在了 ViewHolder 里，没有必要每次都通过 findViewById()方法来获取控件实例了。</p>
-<hr>
-
+        <h2 id="Android-UI生成随机颜色"><a href="#Android-UI生成随机颜色" class="headerlink" title="Android UI生成随机颜色"></a>Android UI生成随机颜色</h2><p>以 <strong>TextView</strong> 举个栗子，我知道的两种简单的方法：</p>
+<h4 id="第一种方法"><a href="#第一种方法" class="headerlink" title="第一种方法"></a>第一种方法</h4><p>利用 <strong>Color</strong> 类的 <strong>parseColor()</strong> 方法，这个方法传入的是颜色对应的代码，比如 <strong>#FFFFFF</strong>，所以要生成一个随机的这样的 <strong>String</strong> 对象就行了，代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">TextView textView = (TextView)view.findViewById(R.id.textView);</div><div class="line">String r,g,b;</div><div class="line">Random random = new Random();</div><div class="line">r = Integer.toHexString(random.nextInt(256)).toUpperCase();</div><div class="line">g = Integer.toHexString(random.nextInt(256)).toUpperCase();</div><div class="line">b = Integer.toHexString(random.nextInt(256)).toUpperCase();</div><div class="line"></div><div class="line">r = r.length()==1 ? &quot;0&quot; + r : r ;</div><div class="line">g = g.length()==1 ? &quot;0&quot; + g : g ;</div><div class="line">b = b.length()==1 ? &quot;0&quot; + b : b ;</div><div class="line">textview.setTextColor(Color.parseColor(&quot;#&quot; + r + g + b);</div></pre></td></tr></table></figure></p>
+<h4 id="第二种方法"><a href="#第二种方法" class="headerlink" title="第二种方法"></a>第二种方法</h4><p>上面那个比较麻烦，下面这个跟这个一个原理。<br>利用 <strong>Color</strong> 类的 <strong>rgb()</strong> 方法，传入三个 <strong>int（0~255）</strong> 数值，就是红绿蓝的值，代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Random random = new Random();</div><div class="line">int r = random.nextInt(256);</div><div class="line">int g = random.nextInt(256);</div><div class="line">int b = random.nextInt(256);</div><div class="line">textView.setTextColor(Color.rgb(r,g,b));</div></pre></td></tr></table></figure></p>
+<h4 id="值班ing，听大佬讲话"><a href="#值班ing，听大佬讲话" class="headerlink" title="值班ing，听大佬讲话"></a>值班ing，听大佬讲话</h4>
       
     </div>
 
@@ -405,15 +398,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/06/24/加载ListView之后更新ListView/" rel="next" title="利用notifyDataSetChanged()方法实现启动活动之后更新 ListView">
+                <i class="fa fa-chevron-left"></i> 利用notifyDataSetChanged()方法实现启动活动之后更新 ListView
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/05/15/解决SwipeRefreshLayout下拉刷新与ListView下拉的冲突/" rel="prev" title="解决SwipeRefreshLayout下拉刷新与ListView下拉的冲突">
-                解决SwipeRefreshLayout下拉刷新与ListView下拉的冲突 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -565,7 +558,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ListView-性能优化"><span class="nav-number">1.</span> <span class="nav-text">ListView 性能优化</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Android-UI生成随机颜色"><span class="nav-number">1.</span> <span class="nav-text">Android UI生成随机颜色</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第一种方法"><span class="nav-number">1.0.1.</span> <span class="nav-text">第一种方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第二种方法"><span class="nav-number">1.0.2.</span> <span class="nav-text">第二种方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#值班ing，听大佬讲话"><span class="nav-number">1.0.3.</span> <span class="nav-text">值班ing，听大佬讲话</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
