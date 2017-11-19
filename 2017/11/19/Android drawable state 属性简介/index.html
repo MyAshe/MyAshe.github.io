@@ -93,17 +93,17 @@
 
 
 
-<meta name="description" content="启动活动之后更新 ListView使用 ListView 的时候，在活动启动之后，如果 ListView 的数据有一些变更，该如何将变更之后的数据显示在界面上，要用到 adapter 的 notifyDataSetChanged() 方法，但是在数据改变之后直接 adapter.notifyDataSetChanged(); 却是更新不出来的，必须要修改一些地方，先清除 list 中的数据，再加载">
+<meta name="description" content="##Android drawable state 属性简介在定义一个 drawable 的时候可以通过在 xml 里面定义的 drawable 对象，使得一个对象能在不同的状态下显示不同的内容，例如 Button，它有 pressed，focused，等状态，通过selector 选择，可以为每种状态提供不同的内容。 XML代码(res/drawable/button.xml)：123456789">
 <meta name="keywords" content="Android 入门">
 <meta property="og:type" content="article">
-<meta property="og:title" content="利用notifyDataSetChanged()方法实现启动活动之后更新 ListView">
-<meta property="og:url" content="http://yoursite.com/2017/06/24/加载ListView之后更新ListView/index.html">
+<meta property="og:title" content="Android drawable state 属性简介">
+<meta property="og:url" content="http://yoursite.com/2017/11/19/Android drawable state 属性简介/index.html">
 <meta property="og:site_name" content="Y Augerlmir">
-<meta property="og:description" content="启动活动之后更新 ListView使用 ListView 的时候，在活动启动之后，如果 ListView 的数据有一些变更，该如何将变更之后的数据显示在界面上，要用到 adapter 的 notifyDataSetChanged() 方法，但是在数据改变之后直接 adapter.notifyDataSetChanged(); 却是更新不出来的，必须要修改一些地方，先清除 list 中的数据，再加载">
-<meta property="og:updated_time" content="2017-06-24T13:58:03.774Z">
+<meta property="og:description" content="##Android drawable state 属性简介在定义一个 drawable 的时候可以通过在 xml 里面定义的 drawable 对象，使得一个对象能在不同的状态下显示不同的内容，例如 Button，它有 pressed，focused，等状态，通过selector 选择，可以为每种状态提供不同的内容。 XML代码(res/drawable/button.xml)：123456789">
+<meta property="og:updated_time" content="2017-11-19T05:29:56.189Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="利用notifyDataSetChanged()方法实现启动活动之后更新 ListView">
-<meta name="twitter:description" content="启动活动之后更新 ListView使用 ListView 的时候，在活动启动之后，如果 ListView 的数据有一些变更，该如何将变更之后的数据显示在界面上，要用到 adapter 的 notifyDataSetChanged() 方法，但是在数据改变之后直接 adapter.notifyDataSetChanged(); 却是更新不出来的，必须要修改一些地方，先清除 list 中的数据，再加载">
+<meta name="twitter:title" content="Android drawable state 属性简介">
+<meta name="twitter:description" content="##Android drawable state 属性简介在定义一个 drawable 的时候可以通过在 xml 里面定义的 drawable 对象，使得一个对象能在不同的状态下显示不同的内容，例如 Button，它有 pressed，focused，等状态，通过selector 选择，可以为每种状态提供不同的内容。 XML代码(res/drawable/button.xml)：123456789">
 
 
 
@@ -131,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/06/24/加载ListView之后更新ListView/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/11/19/Android drawable state 属性简介/"/>
 
 
 
 
 
-  <title>利用notifyDataSetChanged()方法实现启动活动之后更新 ListView | Y Augerlmir</title>
+  <title>Android drawable state 属性简介 | Y Augerlmir</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -267,7 +267,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/24/加载ListView之后更新ListView/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/19/Android drawable state 属性简介/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="GPeng">
@@ -284,7 +284,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">利用notifyDataSetChanged()方法实现启动活动之后更新 ListView</h1>
+          <h1 class="post-title" itemprop="name headline">Android drawable state 属性简介</h1>
         
 
         <div class="post-meta">
@@ -296,8 +296,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-24T19:50:23+08:00">
-                2017-06-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-19T12:59:12+08:00">
+                2017-11-19
               </time>
             
 
@@ -353,8 +353,12 @@
       
 
       
-        <h2 id="启动活动之后更新-ListView"><a href="#启动活动之后更新-ListView" class="headerlink" title="启动活动之后更新 ListView"></a>启动活动之后更新 ListView</h2><p>使用 <strong>ListView</strong> 的时候，在活动启动之后，如果 <strong>ListView</strong> 的数据有一些变更，该如何将变更之后的数据显示在界面上，要用到 <strong>adapter</strong> 的 <strong>notifyDataSetChanged()</strong> 方法，但是在数据改变之后直接 <strong>adapter.notifyDataSetChanged();</strong> 却是更新不出来的，必须要修改一些地方，先清除 <strong>list</strong> 中的数据，再加载更新后的数据，在使用这个方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">private List&lt;???&gt; list = new ArrayList&lt;&gt;();</div><div class="line">private ListView listView = (ListView)findViewById(R.id.listView);</div><div class="line">private ListAdapter adapter = null;</div><div class="line">if (list.size() == 0) &#123;</div><div class="line">	//加载所有</div><div class="line">    ******</div><div class="line">    adapter = new ListAdapter(list,???);</div><div class="line">	listView.setAdapter(adapter);</div><div class="line">&#125; else &#123;</div><div class="line">	//加载变更之后的数据</div><div class="line">    list.clear();                    //先清除 List 中的数据</div><div class="line">    list.addAll(***);	             //然后在加载更新后的所有的数据</div><div class="line">    adapter.notifyDataSetChanged();  //更新数据</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>为什么不能直接用哪个方法？第一次 <strong>adapter</strong> 加载 <strong>list</strong> 的时候 <strong>adapter</strong> 保存的 <strong>list</strong> 指向的是一开始 <strong>List</strong> 的引用，在更新了数据之后，<strong>list</strong> 指向了新的 <strong>List</strong> 引用，但是 <strong>adapter</strong> 保存的 <strong>list</strong> 指向的还是原来的引用，因此在调用 <strong>notifyDataSetChanged()</strong> 时，<strong>adapter</strong> 会跟据原来的引用去更新，因此当然还是原来的结果，不会进行更新。进行以上操作之后， <strong>adapter</strong> 保存的是指向的是新的 <strong>List</strong> 的引用，就更新了。</p>
+        <p>##Android drawable state 属性简介<br>在定义一个 <strong>drawable</strong> 的时候可以通过在 <strong>xml</strong> 里面定义的 <strong>drawable</strong> 对象，使得一个对象能在不同的状态下显示不同的内容，例如 <strong>Button</strong>，它有 <strong>pressed</strong>，<strong>focused</strong>，等状态，通过<strong>selector</strong> 选择，可以为每种状态提供不同的内容。</p>
+<p><strong>XML</strong>代码(res/drawable/button.xml)：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;selector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</div><div class="line">    &lt;item</div><div class="line">    	android:state_pressed=&quot;true&quot;</div><div class="line">        android:drawable=&quot;@drawable/button_pressed&quot; /&gt;</div><div class="line">        &lt;!-- pressed --&gt;</div><div class="line">    &lt;item</div><div class="line">    	android:state_focused=&quot;true&quot;</div><div class="line">       	android:drawable=&quot;@drawable/button_focused&quot; /&gt;</div><div class="line">        &lt;!-- focused --&gt;</div><div class="line">    &lt;item</div><div class="line">    	android:state_hovered=&quot;true&quot;</div><div class="line">        android:drawable=&quot;@drawable/button_focused&quot; /&gt;</div><div class="line">        &lt;!-- hovered --&gt;</div><div class="line">    &lt;item</div><div class="line">    	android:drawable=&quot;@drawable/button_norma&quot; /&gt;</div><div class="line">    	&lt;!-- default --&gt;</div><div class="line">&lt;/selector&gt;</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;Button</div><div class="line">    android:layout_height=&quot;wrap_content&quot;</div><div class="line">    android:layout_width=&quot;wrap_content&quot;</div><div class="line">    android:background=&quot;@drawable/button&quot; /&gt;</div></pre></td></tr></table></figure>
+<p><strong>这些属性的意义</strong>：<br>    android:drawable 放一个drawable里面的资源。<br>    android:state_pressed 是否按下，如一个按钮触摸或者点击。<br>    android:state_focused 是否取得焦点，比如用户选择了一个文本框。<br>    android:state_hovered 光标是否悬停，通常与focused state相同。<br>    android:state_selected 被选中，它与focus state并不完全一样，可能选中整个ListView。<br>    android:state_checkable 组件是否能被check。如：RadioButton是可以被check的。<br>    android:state_checked 被打钩了，如：一个RadioButton可以被打钩了。<br>    android:state_enabled 能够接受触摸或者点击事件。<br>    android:state_activated 被激活(例子)。<br>    android:state_window_focused 应用程序是否在前台。</p>
+<p><strong>下面列举一些其他例子：(res/drawable/example.xml)</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;</div><div class="line">&lt;selector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</div><div class="line"></div><div class="line">	&lt;!-- 默认时的图片内容 --&gt;</div><div class="line">  	&lt;item</div><div class="line">  		android:drawable=&quot;@drawable/pic1&quot; /&gt;</div><div class="line"></div><div class="line">	&lt;!-- 没有焦点时的图片内容 --&gt;</div><div class="line">  	&lt;item</div><div class="line">    	android:state_window_focused=&quot;false&quot;</div><div class="line">        android:drawable=&quot;@drawable/pic1&quot; /&gt;</div><div class="line"></div><div class="line">	&lt;!-- 非触摸模式下获得焦点并单击时的图片内容 --&gt;</div><div class="line">  	&lt;item</div><div class="line">    	android:state_focused=&quot;true&quot;</div><div class="line">        android:state_pressed=&quot;true&quot;</div><div class="line">        android:drawable= &quot;@drawable/pic2&quot; /&gt;</div><div class="line"></div><div class="line">	&lt;!-- 触摸模式下单击时的图片内容 --&gt;</div><div class="line">  	&lt;item</div><div class="line">    	android:state_focused=&quot;false&quot;</div><div class="line">        android:state_pressed=&quot;true&quot;</div><div class="line">        android:drawable=&quot;@drawable/pic3&quot; /&gt;</div><div class="line"></div><div class="line">	&lt;!--选中时的图片内容 --&gt;</div><div class="line">  	&lt;item</div><div class="line">    	android:state_selected=&quot;true&quot;</div><div class="line">        android:drawable=&quot;@drawable/pic4&quot; /&gt;</div><div class="line"></div><div class="line">	&lt;!--获得焦点时的图片内容 --&gt;</div><div class="line">  	&lt;item</div><div class="line">    	android:state_focused=&quot;true&quot;</div><div class="line">        android:drawable=&quot;@drawable/pic5&quot; /&gt;</div><div class="line">&lt;/selector&gt;</div></pre></td></tr></table></figure></p>
+<p>这些可以用在ListView中，如此配置：<br><strong>1：</strong>在listview中配置 android:listSelector = “@drawable/example”<br><strong>2：</strong>在listview的item中添加属性 android:background = “@drawable/example”<br><strong>3：</strong>在java代码中使用 Drawable drawable = getResources().getDrawable(R.drawable.example); (列表有时候会变黑，需要加上：android:cacheColorHint=”@android:color/transparent”)</p>
 
       
     </div>
@@ -397,8 +401,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/18/APP（简易便签）/" rel="next" title="APP（简易便签）">
-                <i class="fa fa-chevron-left"></i> APP（简易便签）
+              <a href="/2017/11/19/Android 动画（anim）简介/" rel="next" title="Android 动画（anim）简介">
+                <i class="fa fa-chevron-left"></i> Android 动画（anim）简介
               </a>
             
           </div>
@@ -406,10 +410,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/06/25/Android UI生成随机颜色/" rel="prev" title="Android UI生成随机颜色">
-                Android UI生成随机颜色 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -456,17 +456,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/sasha.jpg"
@@ -551,22 +542,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#启动活动之后更新-ListView"><span class="nav-number">1.</span> <span class="nav-text">启动活动之后更新 ListView</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
