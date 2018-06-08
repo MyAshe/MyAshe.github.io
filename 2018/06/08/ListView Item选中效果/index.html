@@ -93,17 +93,19 @@
 
 
 
-<meta name="description" content="Android drawable state 属性简介在定义一个 drawable 的时候可以通过在 xml 里面定义的 drawable 对象，使得一个对象能在不同的状态下显示不同的内容，例如 Button，它有 pressed，focused，等状态，通过selector 选择，可以为每种状态提供不同的内容。 XML代码(res/drawable/button.xml)：12345678910">
+<meta name="description" content="ListView 的 Item 选中效果效果如图: 代码如下： 1.首先书写自己的 Adapter 的时候要加一些代码：定义数据时：123456private int textColor;private int backgroundColor;private int color_text;private int color_background;private int defaultSelecti">
 <meta name="keywords" content="Android 入门">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android drawable state 属性简介">
-<meta property="og:url" content="http://yoursite.com/2017/11/19/Android drawable state 属性简介/index.html">
+<meta property="og:title" content="ListView的Item选中效果">
+<meta property="og:url" content="http://yoursite.com/2018/06/08/ListView Item选中效果/index.html">
 <meta property="og:site_name" content="Y Augerlmir">
-<meta property="og:description" content="Android drawable state 属性简介在定义一个 drawable 的时候可以通过在 xml 里面定义的 drawable 对象，使得一个对象能在不同的状态下显示不同的内容，例如 Button，它有 pressed，focused，等状态，通过selector 选择，可以为每种状态提供不同的内容。 XML代码(res/drawable/button.xml)：12345678910">
-<meta property="og:updated_time" content="2017-11-20T11:31:06.879Z">
+<meta property="og:description" content="ListView 的 Item 选中效果效果如图: 代码如下： 1.首先书写自己的 Adapter 的时候要加一些代码：定义数据时：123456private int textColor;private int backgroundColor;private int color_text;private int color_background;private int defaultSelecti">
+<meta property="og:image" content="http://m.qpic.cn/psb?/V13McSpo2uvFZB/XBY2ZZrHVAdl9yfyfXKxi0NUrWeQDhD58sjAb7VYZNU!/b/dDEBAAAAAAAA&bo=OASABzgEgAcRCT4!&rf=viewer_4">
+<meta property="og:updated_time" content="2018-06-08T08:34:57.754Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android drawable state 属性简介">
-<meta name="twitter:description" content="Android drawable state 属性简介在定义一个 drawable 的时候可以通过在 xml 里面定义的 drawable 对象，使得一个对象能在不同的状态下显示不同的内容，例如 Button，它有 pressed，focused，等状态，通过selector 选择，可以为每种状态提供不同的内容。 XML代码(res/drawable/button.xml)：12345678910">
+<meta name="twitter:title" content="ListView的Item选中效果">
+<meta name="twitter:description" content="ListView 的 Item 选中效果效果如图: 代码如下： 1.首先书写自己的 Adapter 的时候要加一些代码：定义数据时：123456private int textColor;private int backgroundColor;private int color_text;private int color_background;private int defaultSelecti">
+<meta name="twitter:image" content="http://m.qpic.cn/psb?/V13McSpo2uvFZB/XBY2ZZrHVAdl9yfyfXKxi0NUrWeQDhD58sjAb7VYZNU!/b/dDEBAAAAAAAA&bo=OASABzgEgAcRCT4!&rf=viewer_4">
 
 
 
@@ -131,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/11/19/Android drawable state 属性简介/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/08/ListView Item选中效果/"/>
 
 
 
 
 
-  <title>Android drawable state 属性简介 | Y Augerlmir</title>
+  <title>ListView的Item选中效果 | Y Augerlmir</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -267,7 +269,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/19/Android drawable state 属性简介/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/08/ListView Item选中效果/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="GPeng">
@@ -284,7 +286,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Android drawable state 属性简介</h1>
+          <h1 class="post-title" itemprop="name headline">ListView的Item选中效果</h1>
         
 
         <div class="post-meta">
@@ -296,8 +298,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-19T12:59:12+08:00">
-                2017-11-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-08T15:57:34+08:00">
+                2018-06-08
               </time>
             
 
@@ -353,12 +355,14 @@
       
 
       
-        <h2 id="Android-drawable-state-属性简介"><a href="#Android-drawable-state-属性简介" class="headerlink" title="Android drawable state 属性简介"></a>Android drawable state 属性简介</h2><p>在定义一个 <strong>drawable</strong> 的时候可以通过在 <strong>xml</strong> 里面定义的 <strong>drawable</strong> 对象，使得一个对象能在不同的状态下显示不同的内容，例如 <strong>Button</strong>，它有 <strong>pressed</strong>，<strong>focused</strong>，等状态，通过<strong>selector</strong> 选择，可以为每种状态提供不同的内容。</p>
-<p><strong>XML</strong>代码(res/drawable/button.xml)：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;selector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</div><div class="line">    &lt;item</div><div class="line">    	android:state_pressed=&quot;true&quot;</div><div class="line">        android:drawable=&quot;@drawable/button_pressed&quot; /&gt;</div><div class="line">        &lt;!-- pressed --&gt;</div><div class="line">    &lt;item</div><div class="line">    	android:state_focused=&quot;true&quot;</div><div class="line">       	android:drawable=&quot;@drawable/button_focused&quot; /&gt;</div><div class="line">        &lt;!-- focused --&gt;</div><div class="line">    &lt;item</div><div class="line">    	android:state_hovered=&quot;true&quot;</div><div class="line">        android:drawable=&quot;@drawable/button_focused&quot; /&gt;</div><div class="line">        &lt;!-- hovered --&gt;</div><div class="line">    &lt;item</div><div class="line">    	android:drawable=&quot;@drawable/button_norma&quot; /&gt;</div><div class="line">    	&lt;!-- default --&gt;</div><div class="line">&lt;/selector&gt;</div></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;Button</div><div class="line">    android:layout_height=&quot;wrap_content&quot;</div><div class="line">    android:layout_width=&quot;wrap_content&quot;</div><div class="line">    android:background=&quot;@drawable/button&quot; /&gt;</div></pre></td></tr></table></figure>
-<p><strong>这些属性的意义</strong>：<br>    <strong>android:drawable</strong> 放一个drawable里面的资源。<br>    <strong>android:state_pressed</strong> 是否按下，如一个按钮触摸或者点击。<br>    <strong>android:state_focused</strong> 是否取得焦点，比如用户选择了一个文本框。<br>    <strong>android:state_hovered</strong> 光标是否悬停，通常与focused state相同。<br>    <strong>android:state_selected</strong> 被选中，它与focus state并不完全一样，可能选中整个ListView。<br>    <strong>android:state_checkable</strong> 组件是否能被check。如：RadioButton是可以被check的。<br>    <strong>android:state_checked</strong> 被打钩了，如：一个RadioButton可以被打钩了。<br>    <strong>android:state_enabled</strong> 能够接受触摸或者点击事件。<br>    <strong>android:state_activated</strong> 被激活(例子)。<br>    <strong>android:state_window_focused</strong> 应用程序是否在前台。</p>
-<p><strong>下面列举一些其他例子：(res/drawable/example.xml)</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;</div><div class="line">&lt;selector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</div><div class="line"></div><div class="line">	&lt;!-- 默认时的图片内容 --&gt;</div><div class="line">	&lt;item</div><div class="line">  	android:drawable=&quot;@drawable/pic1&quot; /&gt;</div><div class="line"></div><div class="line">	&lt;!-- 没有焦点时的图片内容 --&gt;</div><div class="line">  	&lt;item</div><div class="line">    	android:state_window_focused=&quot;false&quot;</div><div class="line">        android:drawable=&quot;@drawable/pic1&quot; /&gt;</div><div class="line"></div><div class="line">	&lt;!-- 非触摸模式下获得焦点并单击时的图片内容 --&gt;</div><div class="line">  	&lt;item</div><div class="line">    	android:state_focused=&quot;true&quot;</div><div class="line">        android:state_pressed=&quot;true&quot;</div><div class="line">        android:drawable= &quot;@drawable/pic2&quot; /&gt;</div><div class="line"></div><div class="line">	&lt;!-- 触摸模式下单击时的图片内容 --&gt;</div><div class="line">  	&lt;item</div><div class="line">    	android:state_focused=&quot;false&quot;</div><div class="line">        android:state_pressed=&quot;true&quot;</div><div class="line">        android:drawable=&quot;@drawable/pic3&quot; /&gt;</div><div class="line"></div><div class="line">	&lt;!--选中时的图片内容 --&gt;</div><div class="line">  	&lt;item</div><div class="line">    	android:state_selected=&quot;true&quot;</div><div class="line">        android:drawable=&quot;@drawable/pic4&quot; /&gt;</div><div class="line"></div><div class="line">	&lt;!--获得焦点时的图片内容 --&gt;</div><div class="line">  	&lt;item</div><div class="line">    	android:state_focused=&quot;true&quot;</div><div class="line">        android:drawable=&quot;@drawable/pic5&quot; /&gt;</div><div class="line">&lt;/selector&gt;</div></pre></td></tr></table></figure></p>
-<p>这些可以用在ListView中，如此配置：<br><strong>1：</strong>在listview中配置 android:listSelector = “@drawable/example”<br><strong>2：</strong>在listview的item中添加属性 android:background = “@drawable/example”<br><strong>3：</strong>在java代码中使用 Drawable drawable = getResources().getDrawable(R.drawable.example); (列表有时候会变黑，需要加上：android:cacheColorHint=”@android:color/transparent”)</p>
+        <h3 id="ListView-的-Item-选中效果"><a href="#ListView-的-Item-选中效果" class="headerlink" title="ListView 的 Item 选中效果"></a>ListView 的 Item 选中效果</h3><p><strong>效果如图:</strong><br><img src="http://m.qpic.cn/psb?/V13McSpo2uvFZB/XBY2ZZrHVAdl9yfyfXKxi0NUrWeQDhD58sjAb7VYZNU!/b/dDEBAAAAAAAA&bo=OASABzgEgAcRCT4!&rf=viewer_4" width="300/"></p>
+<p><strong>代码如下：</strong></p>
+<h4 id="1-首先书写自己的-Adapter-的时候要加一些代码："><a href="#1-首先书写自己的-Adapter-的时候要加一些代码：" class="headerlink" title="1.首先书写自己的 Adapter 的时候要加一些代码："></a>1.首先书写自己的 Adapter 的时候要加一些代码：</h4><p>定义数据时：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">private int textColor;</div><div class="line">private int backgroundColor;</div><div class="line">private int color_text;</div><div class="line">private int color_background;</div><div class="line"></div><div class="line">private int defaultSelection = -1;</div></pre></td></tr></table></figure></p>
+<p>初始化数据：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//选中时文字的颜色</div><div class="line">textColor = mContext.getResources().getColor(R.color.text_pressed);</div><div class="line">//选中时背景的颜色</div><div class="line">backgroundColor = mContext.getResources().getColor(R.color.background_selected);</div><div class="line">//未选中时文字颜色</div><div class="line">color_text = mContext.getResources().getColor(R.color.text_normal);</div><div class="line">//未选中时背景颜色</div><div class="line">color_background = mContext.getResources().getColor(R.color.background_normal);</div></pre></td></tr></table></figure></p>
+<p>在 <strong>getView()</strong> 方法中添加如下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">public View getView(int position, View convertView, ViewGroup parent) &#123;</div><div class="line">	ViewHolder viewHolder;</div><div class="line">	if (convertView == null) &#123;</div><div class="line">		viewHolder = new ViewHolder();</div><div class="line">        convertView = LayoutInflater.from(mContext).inflate(R.layout.item_listview, parent, false);</div><div class="line">		viewHolder.textView = (TextView)convertView.findViewById(R.id.textView);</div><div class="line">        convertView.setTag(viewHolder);</div><div class="line">	&#125;</div><div class="line">	else &#123;</div><div class="line">		viewHolder = (ViewHolder) convertView.getTag();</div><div class="line">	&#125;</div><div class="line">    if (position == defaultSelection) &#123;</div><div class="line">		// 选中时设置颜色</div><div class="line">		viewHolder.textView.setTextColor(textColor);</div><div class="line">		convertView.setBackgroundColor(backgroundColor);</div><div class="line">	&#125; else &#123;</div><div class="line">		// 未选中时设置颜色</div><div class="line">		viewHolder.textView.setTextColor(color_text);</div><div class="line">		convertView.setBackgroundColor(color_background);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class ViewHolder &#123;</div><div class="line">	TextView textView;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>添加一个用于获取位置的方法，在 <strong>OnItemClickListener()</strong> 监听事件中被调用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//添加这个方法用于获取选中位置</div><div class="line">public void setSelectPosition(int position) &#123;</div><div class="line">	if (!(position &lt; 0 || position &gt; list.size())) &#123;</div><div class="line">		defaultSelection = position;</div><div class="line">		notifyDataSetChanged();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="2-在-Activity-中代码如下"><a href="#2-在-Activity-中代码如下" class="headerlink" title="2.在 Activity 中代码如下"></a>2.在 Activity 中代码如下</h4><p>定义变量与初始化数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">private ListView listView;</div><div class="line">private List&lt;String&gt; list;</div><div class="line">private ListViewAdapter adapter;</div><div class="line"></div><div class="line">listView = (ListView) findViewById(R.id.listView);</div><div class="line">list = new ArrayList&lt;&gt;();</div><div class="line">list.add(&quot;***&quot;);  //为 list 添加数据</div><div class="line">adapter = new ListViewAdapter(MainActivity.this, list);</div><div class="line">listView.setAdapter(adapter);</div></pre></td></tr></table></figure></p>
+<p>点击事件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">listView.setOnItemClickListener(new OnItemClickListener() &#123;</div><div class="line">	@Override</div><div class="line">	public void onItemClick(AdapterView&lt;?&gt; parent, View view, int position, long id)&#123;</div><div class="line">		//调用 setSelectPosition 设置选中位置</div><div class="line">        adapter.setSelectPosition(position);</div><div class="line">	&#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -401,8 +405,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/19/Android 动画（anim）简介/" rel="next" title="Android 动画（anim）简介">
-                <i class="fa fa-chevron-left"></i> Android 动画（anim）简介
+              <a href="/2017/11/28/PopupWindow/" rel="next" title="PopupWindow 的方法">
+                <i class="fa fa-chevron-left"></i> PopupWindow 的方法
               </a>
             
           </div>
@@ -410,10 +414,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/11/20/PopupWindow 的基本用法/" rel="prev" title="PopupWindow 的基本用法">
-                PopupWindow 的基本用法 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -565,7 +565,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Android-drawable-state-属性简介"><span class="nav-number">1.</span> <span class="nav-text">Android drawable state 属性简介</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ListView-的-Item-选中效果"><span class="nav-number">1.</span> <span class="nav-text">ListView 的 Item 选中效果</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-首先书写自己的-Adapter-的时候要加一些代码："><span class="nav-number">1.1.</span> <span class="nav-text">1.首先书写自己的 Adapter 的时候要加一些代码：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-在-Activity-中代码如下"><span class="nav-number">1.2.</span> <span class="nav-text">2.在 Activity 中代码如下</span></a></li></ol></li></ol></div>
             
 
           </div>
