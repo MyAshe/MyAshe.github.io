@@ -93,16 +93,16 @@
 
 
 
-<meta name="description" content="Hexo d 报错 could not read Username很久没用过我的博客了，想拿出来用用，然后不幸就出现了：error: failed to execute prompt script (exit code 1)fatal: could not read Username for ‘https://github.com‘: Invalid argument真滴难受啊，不过还好并没有很麻">
+<meta name="description" content="title: Hexo d 报错 could not read Usernamedate: 2018-06-11 18:16:18categories: 杂物tags: -Hexo d 报错 could not read Username很久没用过我的博客了，想拿出来用用，然后不幸就出现了：error: failed to execute prompt script (exit code 1)f">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo d 报错 could not read Username">
+<meta property="og:title" content="Y Augerlmir">
 <meta property="og:url" content="http://yoursite.com/2018/06/11/Hexo d 报错/index.html">
 <meta property="og:site_name" content="Y Augerlmir">
-<meta property="og:description" content="Hexo d 报错 could not read Username很久没用过我的博客了，想拿出来用用，然后不幸就出现了：error: failed to execute prompt script (exit code 1)fatal: could not read Username for ‘https://github.com‘: Invalid argument真滴难受啊，不过还好并没有很麻">
-<meta property="og:updated_time" content="2018-06-11T10:55:57.152Z">
+<meta property="og:description" content="title: Hexo d 报错 could not read Usernamedate: 2018-06-11 18:16:18categories: 杂物tags: -Hexo d 报错 could not read Username很久没用过我的博客了，想拿出来用用，然后不幸就出现了：error: failed to execute prompt script (exit code 1)f">
+<meta property="og:updated_time" content="2018-06-11T10:59:33.090Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo d 报错 could not read Username">
-<meta name="twitter:description" content="Hexo d 报错 could not read Username很久没用过我的博客了，想拿出来用用，然后不幸就出现了：error: failed to execute prompt script (exit code 1)fatal: could not read Username for ‘https://github.com‘: Invalid argument真滴难受啊，不过还好并没有很麻">
+<meta name="twitter:title" content="Y Augerlmir">
+<meta name="twitter:description" content="title: Hexo d 报错 could not read Usernamedate: 2018-06-11 18:16:18categories: 杂物tags: -Hexo d 报错 could not read Username很久没用过我的博客了，想拿出来用用，然后不幸就出现了：error: failed to execute prompt script (exit code 1)f">
 
 
 
@@ -136,7 +136,7 @@
 
 
 
-  <title>Hexo d 报错 could not read Username | Y Augerlmir</title>
+  <title> | Y Augerlmir</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -283,7 +283,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hexo d 报错 could not read Username</h1>
+          <h1 class="post-title" itemprop="name headline"></h1>
         
 
         <div class="post-meta">
@@ -295,7 +295,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-11T18:16:18+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-11T18:59:43+08:00">
                 2018-06-11
               </time>
             
@@ -305,28 +305,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/杂物/" itemprop="url" rel="index">
-                    <span itemprop="name">杂物</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -352,9 +330,19 @@
       
 
       
-        <h3 id="Hexo-d-报错-could-not-read-Username"><a href="#Hexo-d-报错-could-not-read-Username" class="headerlink" title="Hexo d 报错 could not read Username"></a>Hexo d 报错 could not read Username</h3><p>很久没用过我的博客了，想拿出来用用，然后不幸就出现了：<br>error: failed to execute prompt script (exit code 1)<br>fatal: could not read Username for ‘<a href="https://github.com" target="_blank" rel="external">https://github.com</a>‘: Invalid argument<br>真滴难受啊，不过还好并没有很麻烦，知乎是个好地方，找到答案，分享一波= =<br>修改配置文件：<br>根目录下的 <strong>_config.yml</strong><br>deploy节点<br>原来的配置为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">    type: git</div><div class="line">    repo: https://github.com/&#123;yourname&#125;/&#123;yourname&#125;.github.io.git</div><div class="line">    branch: master</div></pre></td></tr></table></figure></p>
-<p>修改为如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">    type: git</div><div class="line">    repo: https://&#123;yourname&#125;:&#123;yourpassword&#125;@github.com/&#123;yourname&#125;/&#123;yourname&#125;.github.io.git</div><div class="line">    branch: master</div></pre></td></tr></table></figure></p>
-<p>来源：知乎<br>链接：<a href="https://www.zhihu.com/question/38219432/answer/328799436" target="_blank" rel="external">https://www.zhihu.com/question/38219432/answer/328799436</a></p>
+        <hr>
+<p>title: Hexo d 报错 could not read Username<br>date: 2018-06-11 18:16:18<br>categories: 杂物<br>tags:</p>
+<h2 id=""><a href="#" class="headerlink" title="-"></a>-</h2><h3 id="Hexo-d-报错-could-not-read-Username"><a href="#Hexo-d-报错-could-not-read-Username" class="headerlink" title="Hexo d 报错 could not read Username"></a>Hexo d 报错 could not read Username</h3><p>很久没用过我的博客了，想拿出来用用，然后不幸就出现了：<br><em>error: failed to execute prompt script (exit code 1)<br>fatal: could not read Username for ‘<a href="https://github.com" target="_blank" rel="external">https://github.com</a>‘: Invalid argument</em><br>真滴难受啊，不过还好并没有很麻烦，知乎是个好地方，找到答案，分享一波= =<br>修改配置文件：<br>根目录下的 <strong>_config.yml</strong><br>deploy节点<br>原来的配置为：</p>
+<pre><code>deploy:
+    type: git
+    repo: https://github.com/{yourname}/{yourname}.github.io.git
+    branch: master
+</code></pre><p>修改为如下：</p>
+<pre><code>deploy:
+    type: git
+    repo: https://{yourname}:{yourpassword}@github.com/{yourname}/{yourname}.github.io.git
+    branch: master
+</code></pre><p>来源：知乎<br>链接：<a href="https://www.zhihu.com/question/38219432/answer/328799436" target="_blank" rel="external">https://www.zhihu.com/question/38219432/answer/328799436</a></p>
 
       
     </div>
@@ -551,7 +539,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hexo-d-报错-could-not-read-Username"><span class="nav-number">1.</span> <span class="nav-text">Hexo d 报错 could not read Username</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">-</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hexo-d-报错-could-not-read-Username"><span class="nav-number">1.1.</span> <span class="nav-text">Hexo d 报错 could not read Username</span></a></li></ol></li></ol></div>
             
 
           </div>
